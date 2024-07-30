@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#40146b"
     },
     "ios": {
       "supportsTablet": true
@@ -18,8 +18,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#40146b"
+      },
+      "package": "com.jpcodingboy.shoppingrun"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9517eee9-8f53-437f-86e4-ae4175e8c722"
+      }
+    },
+    "owner": "jpcodingboy"
   }
 }
