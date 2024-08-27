@@ -42,7 +42,9 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
 
         <View style={styles.card} >
 
-            <TextInput 
+            {/* Text input to enter each items name */}
+
+            <TextInput
             placeholder='Enter Item'
             placeholderTextColor={"#F5A418"}
             style={styles.textInput}
@@ -51,8 +53,11 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
             onChangeText={setItemName}
             />
 
+            {/* mapping the stores */}
             {storeList.map( (store, index) => (
             <View key={index} style={styles.storeContainer} >
+
+            {/* If the store is being edited, a text input will appear, otherwise the store name that has been set will appear */}
 
             {editingStoreIndex === index ? (
                 <TextInput
@@ -62,16 +67,23 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
                     />
                 ): (
             <View style={styles.checkboxContainer} >
-                <Checkbox 
-                    style={styles.checkbox} 
-                    value={selectedStore === store}
-                    onValueChange={() => selectStoreFunction(store) }
-                    color={selectedStore === store ? "#F5A418": "#F5A418"}
-                    />
-                <Text style={styles.checkboxText} >{store}</Text>
+                <Pressable 
+                    onPress={() => console.log(`${store} button has been pressed`)} 
+                    style={styles.storeButtons}
+                    >
+                    <Checkbox
+                        style={styles.checkbox}
+                        value={selectedStore === store}
+                        onValueChange={() => selectStoreFunction(store) }
+                        color={selectedStore === store ? "#F5A418": "#F5A418"}
+                        />
+                    <Text style={styles.checkboxText} >{store}</Text>
+                </Pressable>
             </View>
                 )}
-            
+
+            {/* If the store is being edited, the update button will appear, otherwise the edit and trash icon will appear */}
+
             <View style={styles.updateView} >
 
                 {editingStoreIndex === index ? (
@@ -80,14 +92,14 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
                 </Pressable>
 
                 ):(
-                    
+
                 <Pressable
                     onPress={() => editStore(index)}
                 >
                     <Feather style={styles.edit} name="edit" size={26} color="#F5A418" />
                 </Pressable>
                 )}
-                
+
                 <Pressable
                 onPress={() => deleteStore(index) }
                 >
@@ -98,7 +110,7 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
             )
             )}
 
-
+            {/* Add Button  */}
             <View style={styles.addButtonContainer} >
                     <Pressable
                     onPress={
@@ -116,7 +128,7 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
                             Add
                         </Text>
                     </Pressable>
-            </View> 
+            </View>
 
         </View>
     )

@@ -104,6 +104,7 @@ export const styles = StyleSheet.create({
         padding: 2,
         alignItems: "center",
         marginRight: 5,
+        marginLeft: 5
 
     },
 
@@ -119,5 +120,13 @@ export const styles = StyleSheet.create({
         marginHorizontal: 4,
         alignItems: "flex-end",
         marginBottom: 7,
+    },
+
+    storeButtons: {
+        flexDirection: "row",
+        flex: 1,
+        padding: 2,
+        margin: 1,
+        alignItems: "center",
     }
 });
