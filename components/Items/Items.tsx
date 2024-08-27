@@ -1,10 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, Pressable } from 'react-native';
 import { styles } from './ItemStyles';
-import { useState } from 'react';
 import Checkbox from 'expo-checkbox';
-import { Feather } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 interface ItemsProps {
     storeList: string [];
