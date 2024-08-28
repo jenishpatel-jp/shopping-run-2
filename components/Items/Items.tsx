@@ -3,6 +3,7 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import { styles } from './ItemStyles';
 import Checkbox from 'expo-checkbox';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 
 interface ItemsProps {
     storeList: string [];
@@ -65,18 +66,19 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
                     />
                 ): (
             <View style={styles.checkboxContainer} >
-                <Pressable 
-                    onPress={() => console.log(`${store} button has been pressed`)} 
-                    style={styles.storeButtons}
-                    >
-                    <Checkbox
+                    {/* <Checkbox
                         style={styles.checkbox}
                         value={selectedStore === store}
                         onValueChange={() => selectStoreFunction(store) }
                         color={selectedStore === store ? "#F5A418": "#F5A418"}
-                        />
+                        /> */}
+                    <CustomCheckbox 
+                        key={index}
+                        checked={ selectedStore === store }
+                        onPress={ () => selectStoreFunction(store) }
+                    />
                     <Text style={styles.checkboxText} >{store}</Text>
-                </Pressable>
+
             </View>
                 )}
 
@@ -110,7 +112,7 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
 
             {/* Add Button  */}
             <View style={styles.addButtonContainer} >
-                    <Pressable
+                <Pressable
                     onPress={
                     handleAddItem
                     }
@@ -122,10 +124,10 @@ const Items: React.FC<ItemsProps> = ( {storeList, addItem, editStore, deleteStor
                         }
                     ]}
                     >
-                        <Text style={styles.buttonText}>
-                            Add
-                        </Text>
-                    </Pressable>
+                    <Text style={styles.buttonText}>
+                        Add
+                    </Text>
+                </Pressable>
             </View>
 
         </View>

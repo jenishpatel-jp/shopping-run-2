@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         margin: 2,
         flex: 1,
-        alignItems: "flex-end",
+        alignItems: "center",
     },
 
     checkboxText: {
@@ -118,8 +118,9 @@ export const styles = StyleSheet.create({
     checkbox: {
         marginTop: 11,
         marginHorizontal: 4,
-        alignItems: "flex-end",
+        alignItems: "center",
         marginBottom: 7,
+        borderRadius: 2,
     },
 
     storeButtons: {

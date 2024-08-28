@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     checkboxBase: {
@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: 'coral',
+        borderColor: '#F5A418',
         backgroundColor: 'transparent',
       },
       checkboxChecked: {
-        backgroundColor: 'coral',
+        backgroundColor: '#F5A418',
       },
       appContainer: {
         flex: 1,

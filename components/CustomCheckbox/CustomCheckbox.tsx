@@ -3,14 +3,17 @@ import { Pressable, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './CustomCheckboxStyles';
 
-const CustomCheckbox = () => {
+interface CustomCheckboxProps {
+    checked: boolean;
+    onPress: () => void;
+}
 
-    const [checked, setChecked] = useState(false);
+const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ checked, onPress }) => {
 
     return (
         <Pressable
             style={[styles.checkboxBase, checked && styles.checkboxChecked]}
-            onPress={() => setChecked(!checked)}
+            onPress={onPress}
             >
             { checked && <Ionicons name='checkmark' size={24} color='white' /> }
         </Pressable>
