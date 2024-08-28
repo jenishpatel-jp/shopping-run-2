@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Entypo from '@expo/vector-icons/Entypo';
 import { styles } from './CustomCheckboxStyles';
 
 interface CustomCheckboxProps {
@@ -14,8 +15,9 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ checked, onPress }) => 
         <Pressable
             style={[styles.checkboxBase, checked && styles.checkboxChecked]}
             onPress={onPress}
+            hitSlop={5}
             >
-            { checked && <Ionicons name='checkmark' size={24} color='white' /> }
+            { checked && <Entypo name='check' size={24} color='white' /> }
         </Pressable>
     )
 }

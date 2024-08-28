@@ -38,12 +38,20 @@ export const styles = StyleSheet.create({
     checkboxContainer: {
         flexDirection: "row",
         margin: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     checkbox: {
         marginTop: 7,
-        padding: 2,
+        padding: 3,
         marginLeft: 10,
+        marginRight: 2,
+        width: 24,
+        height: 24,
+        alignItems:'center',
+        justifyContent: 'center',
+
     },
 
     checkboxText: {

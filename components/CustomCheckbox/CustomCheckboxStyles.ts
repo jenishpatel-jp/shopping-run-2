@@ -10,27 +10,35 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#F5A418',
         backgroundColor: 'transparent',
+        marginRight: 3
+
       },
-      checkboxChecked: {
+    checkboxChecked: {
         backgroundColor: '#F5A418',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
-      appContainer: {
+    appContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
       },
-      appTitle: {
+    appTitle: {
         marginVertical: 16,
         fontWeight: 'bold',
         fontSize: 24,
       },
-      checkboxContainer: {
+    checkboxContainer: {
         flexDirection: 'row',
         alignItems: 'center',
       },
-      checkboxLabel: {
+    checkboxLabel: {
         marginLeft: 8,
         fontWeight: '500',
         fontSize: 18,
       },
+    checkBoxTick: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
