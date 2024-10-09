@@ -5,6 +5,11 @@ import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
+/*
+Shopping list component
+lists out each store and what items are allocated to that store
+*/
+
 interface ListsProps {
     shoppingList: { [key: string]: string[] };
     deleteItem: (store: string, item: string) => void;
@@ -18,6 +23,7 @@ interface ListsProps {
     setCompletedItem: (completedItem: string[]) => void;
 }
 
+// interface for the section that is created which has a key object of title and data. 
 interface Section {
     title: string;
     data: string[];
@@ -35,7 +41,10 @@ const Lists: React.FC<ListsProps> = ({
     completedItem,
     setCompletedItem
 }) => {
+
+    //useState to determine which item has been selected
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
 
     const checkOffItem = (item: string) => {
         setCompletedItem([...completedItem, item]);
