@@ -46,12 +46,17 @@ const Lists: React.FC<ListsProps> = ({
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
 
+    /* 
+    function checks of items once clicked. 
+    Sets the item as completed, deletes it from the Shopping List and set the selected item back to null. 
+    */
     const checkOffItem = (item: string) => {
         setCompletedItem([...completedItem, item]);
         deleteItemFromShoppingList(item);
         setSelectedItem(null);
     };
 
+    //Function deletes the item from the Shopping List 
     const deleteItemFromShoppingList = (item: string) => {
         for (const store in shoppingList) {
             if (shoppingList[store].includes(item)) {
@@ -61,16 +66,19 @@ const Lists: React.FC<ListsProps> = ({
         }
     };
 
+    // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 
     const sections: Section[] = Object.keys(shoppingList).map((store) => ({
         title: store,
         data: shoppingList[store]
     }));
 
+    // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items. 
     if (completedItem.length > 0) {
         sections.push({ title: 'Completed', data: completedItem });
     }
 
     return (
+        // Uses the SectionList component to render the header and list
         <SectionList
             sections={sections}
             renderSectionHeader={({ section }) => (
