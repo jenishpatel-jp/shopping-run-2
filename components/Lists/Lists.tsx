@@ -86,6 +86,7 @@ const Lists: React.FC<ListsProps> = ({
             )}
             renderItem={({ item, section }) => (
                 <View>
+                    {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
                     {section.title !== 'Completed' ? (
                         <View style={styles.itemsContainer}>
                             {storeOfItem === section.title && indexOfItem === shoppingList[section.title].indexOf(item) ? (
@@ -108,6 +109,7 @@ const Lists: React.FC<ListsProps> = ({
                                     <Text style={styles.checkboxText}> {item} </Text>
                                 </View>
                             )}
+                            {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
                             <View style={styles.updateView}>
                                 {storeOfItem === section.title && indexOfItem === shoppingList[section.title].indexOf(item) ? (
                                     <Pressable onPress={updateItemName}>
