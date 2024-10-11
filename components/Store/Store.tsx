@@ -8,6 +8,8 @@ interface StoreProps {
 
 const Store: React.FC<StoreProps> = ( {addStore} ) => {
 
+    //The Store component is responsible for adding stores and editing stores
+
     const [storeName, setStoreName] = useState("");
     const [buttonPressed, setButtonPressed] = useState(false);
  

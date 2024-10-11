@@ -89,6 +89,8 @@ const Lists: React.FC<ListsProps> = ({
                     {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
                     {section.title !== 'Completed' ? (
                         <View style={styles.itemsContainer}>
+
+                            {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
                             {storeOfItem === section.title && indexOfItem === shoppingList[section.title].indexOf(item) ? (
                                 <TextInput
                                     style={styles.editTextInput}
