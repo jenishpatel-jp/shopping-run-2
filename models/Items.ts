@@ -13,6 +13,7 @@ export const setUpItemsTable = async () => {
             FOREIGN KEY (storeId) REFERENCES stores (id) ON DELETE CASCADE
             );
             `);
+            // ON DELETE CASCADE ensures that when a store is deleted, all related items are automatically removed. 
         console.log('Items table created successfully');
     } catch (error) {
         console.error('Error creating items tables:', error);
