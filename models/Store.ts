@@ -1,8 +1,8 @@
-import { openDataBase } from "@/lib/db";
+import { openDatabase } from "@/lib/db";
 
 export const setUpStoresTable = async () => {
     try {
-        const db = await openDataBase(); // Open the database asynchronously
+        const db = await openDatabase(); // Open the database asynchronously
         await db.execAsync(`
             PRAGMA journal_mode = WAL;
             CREATE TABLE IF NOT EXISTS stores (

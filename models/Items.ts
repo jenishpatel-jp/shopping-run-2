@@ -1,8 +1,8 @@
-import { openDataBase } from "@/lib/db";
+import { openDatabase } from "@/lib/db";
 
 export const setUpItemsTable = async () => {
     try {
-        const db = await openDataBase(); // Open the database
+        const db = await openDatabase(); // Open the database
         await db.execAsync(`
             PRAGMA journal_mode = WAL;
             CREATE TABLE IF NOT EXISTS items (
