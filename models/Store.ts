@@ -3,8 +3,10 @@ import { openDatabase } from "@/lib/db";
 export const setUpStoresTable = async () => {
     try {
         const db = await openDatabase(); // Open the database asynchronously
+
+        await db.execAsync('PRAGMA journal_mode = WAL;')
+
         await db.execAsync(`
-            PRAGMA journal_mode = WAL;
             CREATE TABLE IF NOT EXISTS stores (
             storeId INTEGER PRIMARY KEY AUTOINCREMENT,
             storeName TEXT NOT NULL

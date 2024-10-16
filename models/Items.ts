@@ -3,8 +3,11 @@ import { openDatabase } from "@/lib/db";
 export const setUpItemsTable = async () => {
     try {
         const db = await openDatabase(); // Open the database
+
+        // Set journal mode to WAL
+        await db.execAsync('PRAGMA journal_mode = WAL;')
+
         await db.execAsync(`
-            PRAGMA journal_mode = WAL;
             CREATE TABLE IF NOT EXISTS items (
             itemId INTEGER PRIMARY KEY AUTOINCREMENT,
             storeId INTEGER NOT NULL,
