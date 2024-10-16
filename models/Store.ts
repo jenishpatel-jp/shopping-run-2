@@ -5,12 +5,12 @@ export const setUpStoresTable = async () => {
         const db = await openDataBase(); // Open the database asynchronously
         await db.execAsync(`
             CREATE TABLE IF NOT EXISTS stores (
-            id INTEGER PRIMARY KEY AUTOINCREMENT
-            name TEXT NOT NULL
+            storeId INTEGER PRIMARY KEY AUTOINCREMENT,
+            storeName TEXT NOT NULL
             )
             
             `);
-            console.log('Stores table created successfully');
+        console.log('Stores table created successfully');
     } catch (error) {
         console.error('Error creating stores tables:', error);
 
