@@ -15,6 +15,15 @@ export const setUpStoresTable = async () => {
         console.log('Stores table created successfully');
     } catch (error) {
         console.error('Error creating stores tables:', error);
+    }
+}
 
+export const addStore = async(store: string) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(`INSERT INTO stores`)
+
+    } catch (error){
+        console.error('Error adding store:', error)
     }
 }
