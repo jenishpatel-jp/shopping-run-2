@@ -18,10 +18,15 @@ export const setUpStoresTable = async () => {
     }
 }
 
-export const addStore = async(store: string) => {
+export const addStore = async(storeName: string) => {
     try {
-        const db = await openDatabase();
-        await db.runAsync(`INSERT INTO stores`)
+        const db = await openDatabase(); //open the database
+
+        const result = await db.runAsync(
+            'INSERT INTO stores (storeName) VALUES (?);', 
+            [storeName]
+        );
+        console.log(`Store added successfully with ID: ${result.lastInsertRowId}, ${result.changes}`);
 
     } catch (error){
         console.error('Error adding store:', error)
