@@ -1,5 +1,6 @@
 import { openDatabase } from "@/lib/db";
 
+//Set up the store table
 export const setUpStoresTable = async () => {
     try {
         const db = await openDatabase(); // Open the database asynchronously
@@ -18,6 +19,7 @@ export const setUpStoresTable = async () => {
     }
 }
 
+// Add a new store to the database
 export const addStore = async(storeName: string) => {
     try {
         const db = await openDatabase(); //open the database
@@ -33,30 +35,41 @@ export const addStore = async(storeName: string) => {
     }
 }
 
-export const editStore = async (storeName: string, storeId: number) => {
+// Edit a store's name by its ID
+export const editStore = async (storeId: number, storeName: string) => {
     try {
         const db = await openDatabase();
 
         const result = await db.runAsync(
-            'UPDATE stores SET storeName = ? WHERE storeId = ?', [storeName, storeId]
+            'UPDATE stores SET storeName = ? WHERE storeId = ?', 
+            [storeName, storeId]
         );
-        console.log(`Store was successfuly updated with ID: ${result.changes}`);
 
+        if (result.changes > 0){
+            console.log(`Store with ID ${storeId} was successfully updated`);
+        } else {
+            console.log(`No store found wiht ID ${storeId} to update`)
+        }
     } catch (error){
         console.error('Error edditing store:', error);
     }
-}
+};
 
-
+// Delete a store by ID
 export const deleteStore = async (storeId: number) => {
     try {
         const db = await openDatabase();
 
         const result = await db.runAsync(
-            'DELETE FROM store WHERE storeId = ?', [storeId]
+            'DELETE FROM stores WHERE storeId = ?', 
+            [storeId]
         );
-        console.log(`Error deleting store: ${result.changes}`);
-
+        
+        if (result.changes > 0) {
+            console.log(`Store with ID ${storeId} was successfully deleted`);
+        } else {
+            console.log(`No store found with ID ${storeId} to delete.`);
+        }
     } catch(error){
         console.error('Error deleting the store', error);
     }
