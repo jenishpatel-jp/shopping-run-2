@@ -33,16 +33,31 @@ export const addStore = async(storeName: string) => {
     }
 }
 
-export const editStore = async (storeName: string) => {
+export const editStore = async (storeName: string, storeId: number) => {
     try {
         const db = await openDatabase();
 
         const result = await db.runAsync(
-            'UPDATE stores SET storeName = ? WHERE value = ?', [storeName]
+            'UPDATE stores SET storeName = ? WHERE storeId = ?', [storeName, storeId]
         );
-        console.log(`Store was successfuly updated with ID: ${result.changes}`)
+        console.log(`Store was successfuly updated with ID: ${result.changes}`);
 
     } catch (error){
-        console.error('Error edditing store:', error)
+        console.error('Error edditing store:', error);
+    }
+}
+
+
+export const deleteStore = async (storeId: number) => {
+    try {
+        const db = await openDatabase();
+
+        const result = await db.runAsync(
+            'DELETE FROM store WHERE storeId = ?', [storeId]
+        );
+        console.log(`Error deleting store: ${result.changes}`);
+
+    } catch(error){
+        console.error('Error deleting the store', error);
     }
 }
