@@ -32,3 +32,17 @@ export const addStore = async(storeName: string) => {
         console.error('Error adding store:', error)
     }
 }
+
+export const editStore = async (storeName: string) => {
+    try {
+        const db = await openDatabase();
+
+        const result = await db.runAsync(
+            'UPDATE stores SET storeName = ? WHERE value = ?', [storeName]
+        );
+        console.log(`Store was successfuly updated with ID: ${result.changes}`)
+
+    } catch (error){
+        console.error('Error edditing store:', error)
+    }
+}
