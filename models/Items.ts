@@ -56,7 +56,7 @@ export const editItem = async (itemId: number, itemName: string) => {
             console.log(`No item found with ID ${itemId} to update`)
         }
     } catch (error){
-        console.error('Error editing item:', error)
+        console.error('Error editing item:', error);
     }
 };
 
@@ -76,15 +76,26 @@ export const deleteItem = async (itemId: number) => {
             console.log(`No item found with ${itemId} to delete.`)
         }
     } catch (error){
-        console.error('Error deleting the item', error)
+        console.error('Error deleting the item', error);
     }
 };
 
 //Delete all the items in the database
 export const deleteAllItems = async () => {
     try {
+        const db = await openDatabase();
+
+        const result = await db.runAsync(
+            'DELETE * FROM items',
+        )
+
+        if (result.changes > 0){
+            console.log('All the items have been deleted')
+        } else {
+            console.log('Error deleting all the items')
+        }
 
     } catch (error){
-
+        console.error('Error deleting all the items', error);
     }
 };
