@@ -61,11 +61,22 @@ export const editItem = async (itemId: number, itemName: string) => {
 };
 
 // Delete the item in the database 
-export const deleteItem = async () => {
+export const deleteItem = async (itemId: number) => {
     try {
+        const db = await openDatabase();
 
+        const result = await db.runAsync(
+            'DELETE FROM items WHERE itemId = ?',
+            [itemId]
+        );
+
+        if (result.changes > 0){
+            console.log(`Item with ID ${itemId} was successfully deleted`)
+        } else {
+            console.log(`No item found with ${itemId} to delete.`)
+        }
     } catch (error){
-
+        console.error('Error deleting the item', error)
     }
 };
 
