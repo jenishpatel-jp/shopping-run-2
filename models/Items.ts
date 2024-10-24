@@ -21,4 +21,45 @@ export const setUpItemsTable = async () => {
     } catch (error) {
         console.error('Error creating items tables:', error);
     }
-}
+};
+
+// Add a new item to the items database
+export const addItem = async (storeId: number, itemName: string, completed: number) => {
+    try {
+        const db = await openDatabase(); //open the database
+
+        const result = await db.runAsync(
+            'INSERT INTO items (storeId, itemName, completed) (?, ?, ?);',
+            [storeId, itemName, completed]
+        );
+
+        console.log(`Item added successfully with ID: ${result.lastInsertRowId, result.changes}`)
+
+    } catch (error){
+        console.error('Error creating stores tables:', error);
+    }
+};
+
+export const editItem = async () => {
+    try {
+
+    } catch (error){
+
+    }
+};
+
+export const deleteItem = async () => {
+    try {
+
+    } catch (error){
+
+    }
+};
+
+export const deleteAllItems = async () => {
+    try {
+
+    } catch (error){
+
+    }
+};

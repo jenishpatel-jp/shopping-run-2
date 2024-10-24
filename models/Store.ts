@@ -17,7 +17,7 @@ export const setUpStoresTable = async () => {
     } catch (error) {
         console.error('Error creating stores tables:', error);
     }
-}
+};
 
 // Add a new store to the database
 export const addStore = async(storeName: string) => {
@@ -28,12 +28,13 @@ export const addStore = async(storeName: string) => {
             'INSERT INTO stores (storeName) VALUES (?);', 
             [storeName]
         );
+        
         console.log(`Store added successfully with ID: ${result.lastInsertRowId}, ${result.changes}`);
 
     } catch (error){
         console.error('Error adding store:', error)
     }
-}
+};
 
 // Edit a store's name by its ID
 export const editStore = async (storeId: number, storeName: string) => {
@@ -73,4 +74,4 @@ export const deleteStore = async (storeId: number) => {
     } catch(error){
         console.error('Error deleting the store', error);
     }
-}
+};
