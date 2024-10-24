@@ -13,7 +13,7 @@ export const setUpItemsTable = async () => {
             storeId INTEGER NOT NULL,
             itemName TEXT NOT NULL,
             completed INTEGER DEFAULT 0, -- Use INTEGER for boolean values (0 = false, 1 = true)
-            FOREIGN KEY (storeId) REFERENCES stores (id) ON DELETE CASCADE
+            FOREIGN KEY (storeId) REFERENCES stores (storeId) ON DELETE CASCADE
             );
             `);
             // ON DELETE CASCADE ensures that when a store is deleted, all related items are automatically removed. 
@@ -24,19 +24,19 @@ export const setUpItemsTable = async () => {
 };
 
 // Add a new item to the items database
-export const addItem = async (storeId: number, itemName: string, completed: number) => {
+export const addItem = async (storeId: number, itemName: string, completed: number = 0) => {
     try {
         const db = await openDatabase(); //open the database
 
         const result = await db.runAsync(
-            'INSERT INTO items (storeId, itemName, completed) (?, ?, ?);',
+            'INSERT INTO items (storeId, itemName, completed) VALUES (?, ?, ?);',
             [storeId, itemName, completed]
         );
 
         console.log(`Item added successfully with ID: ${result.lastInsertRowId, result.changes}`)
 
     } catch (error){
-        console.error('Error creating stores tables:', error);
+        console.error('Error adding item:', error);
     }
 };
 
