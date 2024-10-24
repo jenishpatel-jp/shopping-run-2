@@ -46,11 +46,11 @@ export const editItem = async (itemId: number, itemName: string) => {
         const db = await openDatabase();
 
         const result = await db.runAsync(
-            'UPDATE items SET itemName WHERE itemId = ?',
+            'UPDATE items SET itemName = ? WHERE itemId = ?',
             [itemName, itemId]
         );
 
-        if (result.changes){
+        if (result.changes > 0){
             console.log(`Item with ID ${itemId} was successfully updated`)
         } else {
             console.log(`No item found with ID ${itemId} to update`)
@@ -86,7 +86,7 @@ export const deleteAllItems = async () => {
         const db = await openDatabase();
 
         const result = await db.runAsync(
-            'DELETE * FROM items',
+            'DELETE FROM items',
         )
 
         if (result.changes > 0){
