@@ -28,7 +28,7 @@ export const addStore = async(storeName: string) => {
             'INSERT INTO stores (storeName) VALUES (?);', 
             [storeName]
         );
-        
+
         console.log(`Store added successfully with ID: ${result.lastInsertRowId}, ${result.changes}`);
 
     } catch (error){
@@ -49,7 +49,7 @@ export const editStore = async (storeId: number, storeName: string) => {
         if (result.changes > 0){
             console.log(`Store with ID ${storeId} was successfully updated`);
         } else {
-            console.log(`No store found wiht ID ${storeId} to update`)
+            console.log(`No store found with ID ${storeId} to update`)
         }
     } catch (error){
         console.error('Error edditing store:', error);

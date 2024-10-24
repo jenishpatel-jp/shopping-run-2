@@ -40,14 +40,27 @@ export const addItem = async (storeId: number, itemName: string, completed: numb
     }
 };
 
-export const editItem = async () => {
+// Edit item in the database
+export const editItem = async (itemId: number, itemName: string) => {
     try {
+        const db = await openDatabase();
 
+        const result = await db.runAsync(
+            'UPDATE items SET itemName WHERE itemId = ?',
+            [itemName, itemId]
+        );
+
+        if (result.changes){
+            console.log(`Item with ID ${itemId} was successfully updated`)
+        } else {
+            console.log(`No item found with ID ${itemId} to update`)
+        }
     } catch (error){
-
+        console.error('Error editing item:', error)
     }
 };
 
+// Delete the item in the database 
 export const deleteItem = async () => {
     try {
 
@@ -56,6 +69,7 @@ export const deleteItem = async () => {
     }
 };
 
+//Delete all the items in the database
 export const deleteAllItems = async () => {
     try {
 
