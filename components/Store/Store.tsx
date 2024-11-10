@@ -3,7 +3,6 @@ import {View, Text, TextInput, Pressable } from 'react-native'
 import { styles } from './StoreStyles';
 import { addStore } from '@/models/Store';
 
-
 /*
 ~~~ The Store Component ~~~ 
 
@@ -12,7 +11,6 @@ The component should allow you to enter a store name and click Add to save the s
 The add button needs a function that allows you to add the store to the database. 
 
 */
-
 
 const Store = () => {
 
