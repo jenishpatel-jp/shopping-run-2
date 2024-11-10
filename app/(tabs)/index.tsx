@@ -8,6 +8,8 @@ import { StyleSheet, View, FlatList, ListRenderItem } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { addStore } from '../../utils/storeUtils';
 import { openDatabase } from '@/lib/db';
+import { setUpStoresTable } from '@/models/Store';
+import { setUpItemsTable } from '@/models/Items';
 
 export default function ShoppingRun(){
 
@@ -45,16 +47,18 @@ export default function ShoppingRun(){
       />
     } 
   ];
-
-  useEffect(() => {
-    openDatabase();
-  }, [])
   
   const renderItem: ListRenderItem<ListItem> = ({ item }) => (
     <View style={styles.itemContainer} >
       {item.component}
     </View>
   );
+
+  useEffect(() => {
+    openDatabase();
+    setUpStoresTable();
+    setUpItemsTable();
+  }, []);
 
   return (
     <SafeAreaProvider >

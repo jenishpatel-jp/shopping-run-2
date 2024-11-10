@@ -20,11 +20,16 @@ const Store: React.FC<StoreProps> = ( {addStore} ) => {
 
     //The Store component is responsible for adding stores and editing stores
 
+    //The storeName useState will store the name of the store temporarily before it is added to the Database. 
     const [storeName, setStoreName] = useState("");
+
+    //buttonPressed useState will determine what colour the button will be when pressed 
     const [buttonPressed, setButtonPressed] = useState(false);
 
     return (
         <View style= {styles.card} >
+
+            {/* Text input where the user enters the Store name. */}
             <TextInput
                 style={styles.textInput}
                 placeholder='Enter store name...'
@@ -34,6 +39,7 @@ const Store: React.FC<StoreProps> = ( {addStore} ) => {
                 onChangeText={setStoreName}
             />
 
+            {/* Add button */}
             <View style={styles.addButtonContainer} >
                 <Pressable
                 onPress={() => {
@@ -41,6 +47,7 @@ const Store: React.FC<StoreProps> = ( {addStore} ) => {
                     setStoreName("");
                 }}
 
+                // Updates the useState buttonPressed and determines the colour of the button. 
                 onPressIn={() => setButtonPressed(true)}
                 onPressOut={() => setButtonPressed(false)}
                 style={( {pressed} ) => [
