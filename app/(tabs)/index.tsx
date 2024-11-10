@@ -6,7 +6,6 @@ import ResetButton from '../../components/Buttons/resetButton';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ListRenderItem } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { addStore } from '../../utils/storeUtils';
 import { openDatabase } from '@/lib/db';
 import { setUpStoresTable } from '@/models/Store';
 import { setUpItemsTable } from '@/models/Items';
@@ -24,9 +23,7 @@ export default function ShoppingRun(){
 
   const data: ListItem[] = [
     { key: 'store', component:
-      <Store 
-        addStore={(storeName: string) => addStore(storeName, storeList, setStoreList)}
-      />
+      <Store />
     },
     { key: 'items', component:
       <Items

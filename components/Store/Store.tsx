@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {View, Text, TextInput, Pressable } from 'react-native'
 import { styles } from './StoreStyles';
+import { addStore } from '@/models/Store';
 
 
 /*
@@ -12,11 +13,8 @@ The add button needs a function that allows you to add the store to the database
 
 */
 
-interface StoreProps {
-    addStore: (storeName: string ) => void;
-}
 
-const Store: React.FC<StoreProps> = ( {addStore} ) => {
+const Store = () => {
 
     //The Store component is responsible for adding stores and editing stores
 
