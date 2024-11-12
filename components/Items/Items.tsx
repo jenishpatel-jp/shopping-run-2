@@ -33,10 +33,13 @@ const Items: React.FC<ItemsProps> = ( {storeList, newStoreName, setNewStoreName}
     // };
 
     return (
-        <View>
-            <Text>Temporary</Text>
+        <View style={styles.card}>
+            <TextInput
+            placeholder='Enter Item'
+            />
         </View>
 
+        
         // <View style={styles.card} >
 
         //     {/* Text input to enter each items name */}
