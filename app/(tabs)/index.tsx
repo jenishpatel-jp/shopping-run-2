@@ -57,6 +57,8 @@ export default function ShoppingRun(){
     setUpItemsTable();
   }, []);
 
+  //possibly use getAllAsync or something similar to get the stores from the database. 
+
   return (
     <SafeAreaProvider >
       <SafeAreaView style={styles.container}>

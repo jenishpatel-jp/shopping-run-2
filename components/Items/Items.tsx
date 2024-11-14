@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, Pressable } from 'react-native';
 import { styles } from './ItemStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
@@ -16,6 +16,8 @@ const Items: React.FC<ItemsProps> = ( {storeList, newStoreName, setNewStoreName}
     const [buttonPressed, setButtonPressed] = useState(false);
     const [selectedStore, setSelectedStore] = useState <string | null > (null);
     const [itemName, setItemName] = useState<string>("");
+
+    
 
     // const handleAddItem = () => {
     //     if (selectedStore && itemName) {
