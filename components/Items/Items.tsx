@@ -34,9 +34,17 @@ const Items: React.FC<ItemsProps> = ( {storeList, newStoreName, setNewStoreName}
 
     return (
         <View style={styles.card}>
+
+            {/* Text Input to enter each items name */}
             <TextInput
             placeholder='Enter Item'
+            style={styles.textInput}
+            textAlign='center'
+            value={itemName}
+            onChangeText={setItemName}
             />
+
+            {/* Mapping  */}
         </View>
 
         
