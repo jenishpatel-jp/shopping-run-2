@@ -83,7 +83,7 @@ type StoreRow = {
     storeName: string;
 };
 
-export const getStores = async () => {
+export const getStores = async (): Promise<string[]> => {
     try {
         const db = await openDatabase();
         let storeList: string[] = [];
