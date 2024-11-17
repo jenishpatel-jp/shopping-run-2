@@ -3,18 +3,17 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import { styles } from './ItemStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
-import { addStore, editStore, deleteStore } from '@/models/Store';
+import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 
 interface ItemsProps {
-    storeList: string [];
+
     newStoreName: string;
     setNewStoreName: (name: string) => void;
 }
 
-const Items: React.FC<ItemsProps> = ( {storeList, newStoreName, setNewStoreName} ) => {
+const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
-    const [selectedStore, setSelectedStore] = useState <string | null > (null);
     const [itemName, setItemName] = useState<string>("");
 
     

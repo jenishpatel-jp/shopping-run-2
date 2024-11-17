@@ -12,7 +12,6 @@ import { setUpItemsTable } from '@/models/Items';
 
 export default function ShoppingRun(){
 
-  const [storeList, setStoreList] = useState<string[]>([]);
   const [newStoreName, setNewStoreName] = useState<string>('');
   const [newItemName, setNewItemName] = useState<string>("");
 
@@ -27,7 +26,6 @@ export default function ShoppingRun(){
     },
     { key: 'items', component:
       <Items
-        storeList={storeList}
         newStoreName={newStoreName}
         setNewStoreName={setNewStoreName}
       />
