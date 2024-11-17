@@ -78,15 +78,21 @@ export const deleteStore = async (storeId: number) => {
 
 // Get the stores from the Database
 
+type StoreRow = {
+    storeId: number;
+    storeName: string;
+};
+
 export const getStores = async () => {
     try {
         const db = await openDatabase();
-        const storeList = [];
-        const allRows = await db.getAllAsync('SELECT * FROM stores');
-        for (const rows of allRows){
-
-        }
+        let storeList: string[] = [];
+        const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
+        
+        storeList = allRows.map((row) => row.storeName);
+        return storeList;
     } catch(error) {
-        console.error('Error getting the stores', Error)
+        console.error('Error getting the stores', Error);
+        return [];
     }
 }
