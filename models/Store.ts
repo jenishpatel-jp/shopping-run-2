@@ -75,3 +75,18 @@ export const deleteStore = async (storeId: number) => {
         console.error('Error deleting the store', error);
     }
 };
+
+// Get the stores from the Database
+
+export const getStores = async () => {
+    try {
+        const db = await openDatabase();
+        const storeList = [];
+        const allRows = await db.getAllAsync('SELECT * FROM stores');
+        for (const rows of allRows){
+
+        }
+    } catch(error) {
+        console.error('Error getting the stores', Error)
+    }
+}
