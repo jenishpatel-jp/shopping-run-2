@@ -6,7 +6,6 @@ import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 
 interface ItemsProps {
-
     newStoreName: string;
     setNewStoreName: (name: string) => void;
 }
@@ -15,6 +14,21 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
+
+
+    /* 
+    ~~~ Display the Stores ~~~
+
+    getStores is a function that returns the storeList. 
+    I can get the stores and add it to a variable and map that store. 
+
+    I need to ensure that as a new store is added, the storeList is updated and rendered again. 
+
+    I can use a useEffect function to udpate run whenever a store is added. 
+    Maybe I can use a useState function to store the storeList? 
+    
+    
+    */
 
     
 
