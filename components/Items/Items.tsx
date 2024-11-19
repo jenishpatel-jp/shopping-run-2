@@ -15,6 +15,8 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
     const [stores, setStores] = useState<string[]>([]);
+    const [selectedStore, setSelectedStore] = useState<string | null>();
+    const [editingStoreIndex, setEditingStoreIndex] = useState<Number>()
 
     useEffect(() => {
         const fetchStores = async() => {
@@ -29,41 +31,22 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
         fetchStores();
     }, []);
 
+    //Function to add an item to the store
+    const handleAddItem = () => {
+        if (selectedStore && itemName) {
+            //add item function here
+            setItemName("");
+        }
+    };
 
-    /* 
-    ~~~ Display the Stores ~~~
-    getStores is a function that returns the storeList. 
-    I can get the stores and add it to a variable and map that store. 
-
-    I need to ensure that as a new store is added, the storeList is updated and rendered again. 
-
-    I can use a useEffect function to udpate run whenever a store is added. 
-    Maybe I can use a useState function to store the storeList? 
-    
-    
-    */
-
-    useEffect
-
-
-    const storeList = getStores();
-
-    
-
-    // const handleAddItem = () => {
-    //     if (selectedStore && itemName) {
-    //         addItem(selectedStore, itemName);
-    //         setItemName("");
-    //     }
-    // };
-
-    // const selectStoreFunction = (store: string) => {
-    //     if (!selectedStore){
-    //         setSelectedStore(store)
-    //     } else {
-    //         setSelectedStore(null);
-    //     }
-    // };
+    //Function to select which store has been selected
+    const selectStoreFunction = (store: string) => {
+        if (!selectedStore){
+            setSelectedStore(store)
+        } else {
+            setSelectedStore(null);
+        }
+    };
 
     return (
         <View style={styles.card}>
@@ -78,6 +61,21 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
             />
 
             {/* Mapping  */}
+            {stores.map( (store, index) => (
+                <View key={index} style={styles.storeContainer}>
+                    {editingStoreIndex === index ? (
+                        <TextInput></TextInput>
+         
+                    ):(
+                        <View></View>
+
+                    )} 
+
+
+                </View>
+                
+                
+                ))}
              
         
         </View>
@@ -87,15 +85,6 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
         // <View style={styles.card} >
 
         //     {/* Text input to enter each items name */}
-
-        //     <TextInput
-        //     placeholder='Enter Item'
-        //     placeholderTextColor={"#F5A418"}
-        //     style={styles.textInput}
-        //     textAlign='center'
-        //     value={itemName}
-        //     onChangeText={setItemName}
-        //     />
 
         //     {/* mapping the stores */}
         //     {storeList.map( (store, index) => (
