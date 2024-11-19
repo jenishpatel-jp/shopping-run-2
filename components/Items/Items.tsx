@@ -14,11 +14,24 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
+    const [stores, setStores] = useState<string[]>([]);
+
+    useEffect(() => {
+        const fetchStores = async() => {
+            try {
+                const storeList = await getStores();
+                setStores(storeList);
+            }catch(error){
+                console.error('Error fetching stores:', error)
+            }
+        }
+
+        fetchStores();
+    }, []);
 
 
     /* 
     ~~~ Display the Stores ~~~
-
     getStores is a function that returns the storeList. 
     I can get the stores and add it to a variable and map that store. 
 
@@ -29,6 +42,11 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
     
     
     */
+
+    useEffect
+
+
+    const storeList = getStores();
 
     
 
@@ -60,7 +78,10 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
             />
 
             {/* Mapping  */}
+             
+        
         </View>
+
 
         
         // <View style={styles.card} >
