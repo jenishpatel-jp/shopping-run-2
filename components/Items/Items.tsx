@@ -16,7 +16,7 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
     const [itemName, setItemName] = useState<string>("");
     const [stores, setStores] = useState<string[]>([]);
     const [selectedStore, setSelectedStore] = useState<string | null>();
-    const [editingStoreIndex, setEditingStoreIndex] = useState<Number>()
+    const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>()
 
     useEffect(() => {
         const fetchStores = async() => {
@@ -63,13 +63,26 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
             {/* Mapping  */}
             {stores.map( (store, index) => (
                 <View key={index} style={styles.storeContainer}>
-                    {editingStoreIndex === index ? (
-                        <TextInput></TextInput>
-         
-                    ):(
-                        <View></View>
 
+                    {/* Conditonal - Text input | store name */}
+                    {editingStoreIndex === index ? (
+                        <TextInput
+                            style={styles.editTextInput}
+                            value={newStoreName}
+                            onChangeText={setNewStoreName}
+                        />
+                    ):(
+                        <View style={styles.checkboxContainer} >
+                            <CustomCheckbox
+                                key={index}
+                                onPress={() => console.log()}
+                                checked={ selectedStore === store }
+                            />
+                            <Text style={styles.checkbox}>{store}</Text>
+                        </View>
                     )} 
+
+                    {/* Conditional - Update | Edit */}
 
 
                 </View>
