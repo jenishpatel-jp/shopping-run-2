@@ -83,11 +83,30 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
                     )} 
 
                     {/* Conditional - Update | Edit */}
-
-
+                    <View style={styles.updateView}>
+                    {editingStoreIndex === index ? (
+                        <Pressable onPress={()=> console.log("Update store name function")}>
+                            <Text>Update</Text>
+                        </Pressable>):(
+                        <Pressable>
+                            <Feather 
+                                style={styles.edit} 
+                                name='edit' size={26} 
+                                color='#F5A418'/>
+                        </Pressable>    
+                        )}
+                        <Pressable
+                            onPress={()=> console.log('Delete store function')}
+                        >
+                            <MaterialIcons 
+                                style={styles.delete} 
+                                name='delete-outline'  
+                                size={30}
+                                color="#F5A418"
+                                />
+                        </Pressable>
                 </View>
-                
-                
+                </View>
                 ))}
              
         
@@ -113,12 +132,6 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
         //             />
         //         ): (
         //     <View style={styles.checkboxContainer} >
-        //             {/* <Checkbox
-        //                 style={styles.checkbox}
-        //                 value={selectedStore === store}
-        //                 onValueChange={() => selectStoreFunction(store) }
-        //                 color={selectedStore === store ? "#F5A418": "#F5A418"}
-        //                 /> */}
         //             <CustomCheckbox 
         //                 key={index}
         //                 checked={ selectedStore === store }
