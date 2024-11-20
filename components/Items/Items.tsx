@@ -108,6 +108,22 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
                 </View>
                 </View>
                 ))}
+
+                {/* Add Button */}
+
+                <View style={styles.addButtonContainer}>
+                    <Pressable
+                        onPress={()=> console.log("Add item")}
+                        onPressIn={()=> setButtonPressed(true)}
+                        onPressOut={(()=> setButtonPressed(false))}
+                    >
+
+                    </Pressable>
+                    <Text style={styles.buttonText}>
+                        Add
+                    </Text>
+                    
+                </View>
              
         
         </View>
