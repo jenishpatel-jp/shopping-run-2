@@ -5,21 +5,19 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 
-interface ItemsProps {
-    newStoreName: string;
-    setNewStoreName: (name: string) => void;
-}
 
-const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
+const Items: React.FC = () => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
     const [stores, setStores] = useState<string[]>([]);
     const [selectedStore, setSelectedStore] = useState<string | null>();
-    const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>()
+    const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>();
+    const [newStoreName, setNewStoreName] = useState<string>("");
 
 
-    //useEffect to fetch stores. Might need to update to ensure it is called whenever the storeList is updated. 
+    //useEffect to fetch stores abd add them to the storeList useState. Might need to update to ensure it is called whenever the storeList is updated. 
+
     useEffect(() => {
         const fetchStores = async() => {
             try {
@@ -72,7 +70,7 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
                         <TextInput
                             style={styles.editTextInput}
                             value={newStoreName}
-                            onChangeText={setNewStoreName}
+                            onChangeText={(newStoreName) => setNewStoreName(newStoreName)}
                         />
                     ):(
                         <View style={styles.checkboxContainer} >
@@ -88,7 +86,7 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
                     {/* Conditional - Update | Edit */}
                     <View style={styles.updateView}>
                     {editingStoreIndex === index ? (
-                        <Pressable onPress={()=> console.log("Update store name function")}>
+                        <Pressable onPress={() => console.log('Edit store function')}>
                             <Text>Update</Text>
                         </Pressable>):(
                         <Pressable>
