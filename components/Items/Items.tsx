@@ -18,6 +18,8 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
     const [selectedStore, setSelectedStore] = useState<string | null>();
     const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>()
 
+
+    //useEffect to fetch stores. Might need to update to ensure it is called whenever the storeList is updated. 
     useEffect(() => {
         const fetchStores = async() => {
             try {
@@ -32,9 +34,10 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
     }, []);
 
     //Function to add an item to the store
-    const handleAddItem = () => {
+    const handleAddItem = (itemName: string) => {
         if (selectedStore && itemName) {
             //add item function here
+
             setItemName("");
         }
     };
@@ -60,7 +63,7 @@ const Items: React.FC<ItemsProps> = ( {newStoreName, setNewStoreName} ) => {
             onChangeText={setItemName}
             />
 
-            {/* Mapping  */}
+            {/* Mapping  each store*/}
             {stores.map( (store, index) => (
                 <View key={index} style={styles.storeContainer}>
 
