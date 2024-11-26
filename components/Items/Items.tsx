@@ -34,9 +34,10 @@ const Items: React.FC = () => {
     }, [stores]);
 
     //Function to add an item to the store
-    const handleAddItem = (itemName: string) => {
+    const handleAddItem = (storeId: number, itemName: string) => {
         if (selectedStore && itemName) {
             //add item function here
+            addItem(storeId,itemName)
             setItemName("");
         }
     };
