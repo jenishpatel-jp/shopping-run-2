@@ -6,13 +6,14 @@ import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 
 
+
 const Items: React.FC = () => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
-    const [stores, setStores] = useState<string[]>([]);
+    const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
     const [selectedStore, setSelectedStore] = useState<string | null>();
-    const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>();
+    const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
     const [newStoreName, setNewStoreName] = useState<string>("");
 
 
@@ -21,15 +22,15 @@ const Items: React.FC = () => {
     useEffect(() => {
         const fetchStores = async() => {
             try {
-                const storeList = await getStores();
-                setStores(storeList);
+                const allStores = await getStores();
+                setStores(allStores);
             }catch(error){
                 console.error('Error fetching stores:', error)
             }
         }
 
         fetchStores();
-    }, []);
+    }, [stores]);
 
     //Function to add an item to the store
     const handleAddItem = (itemName: string) => {
@@ -77,9 +78,9 @@ const Items: React.FC = () => {
                             <CustomCheckbox
                                 key={index}
                                 onPress={() => console.log()}
-                                checked={ selectedStore === store }
+                                checked={ selectedStore === store.storeName }
                             />
-                            <Text style={styles.checkbox}>{store}</Text>
+                            <Text style={styles.checkbox}>{store.storeName}</Text>
                         </View>
                     )} 
 

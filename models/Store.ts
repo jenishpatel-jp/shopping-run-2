@@ -83,14 +83,11 @@ type StoreRow = {
     storeName: string;
 };
 
-export const getStores = async (): Promise<string[]> => {
+export const getStores = async (): Promise<StoreRow[]> => {
     try {
         const db = await openDatabase();
-        let storeList: string[] = [];
         const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
-        
-        storeList = allRows.map((row) => row.storeName);
-        return storeList;
+        return allRows;
     } catch(error) {
         console.error('Error getting the stores', Error);
         return [];
