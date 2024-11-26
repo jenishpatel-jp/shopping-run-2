@@ -7,7 +7,6 @@ import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 import { addItem } from '@/models/Items';
 
 
-
 const Items: React.FC = () => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
@@ -78,7 +77,7 @@ const Items: React.FC = () => {
                         <View style={styles.checkboxContainer} >
                             <CustomCheckbox
                                 key={index}
-                                onPress={() => console.log()}
+                                onPress={() => setEditingStoreIndex(index)}
                                 checked={ selectedStore === store.storeName }
                             />
                             <Text style={styles.checkbox}>{store.storeName}</Text>
