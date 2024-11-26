@@ -4,6 +4,7 @@ import { styles } from './ItemStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
+import { addItem } from '@/models/Items';
 
 
 
@@ -36,7 +37,6 @@ const Items: React.FC = () => {
     const handleAddItem = (itemName: string) => {
         if (selectedStore && itemName) {
             //add item function here
-
             setItemName("");
         }
     };
