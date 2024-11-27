@@ -7,6 +7,17 @@ import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
 import { addItem } from '@/models/Items';
 
 
+/* 
+
+Things to do: 
+
+- Edit store function button is not working 
+- The store texts are black and small 
+
+
+*/
+
+
 const Items: React.FC = () => {
 
     const [buttonPressed, setButtonPressed] = useState(false);

@@ -5,7 +5,6 @@ import * as SQLite from 'expo-sqlite';
 export const openDatabase = async () => {
     try {
         const db = await SQLite.openDatabaseAsync('shopping_run.db');
-        console.log('Database opened successfully');
         return db;
     } catch (error){
         console.error('Error opening database:', error);
