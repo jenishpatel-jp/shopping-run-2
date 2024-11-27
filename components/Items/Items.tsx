@@ -100,7 +100,7 @@ const Items: React.FC = () => {
                         </Pressable>    
                         )}
                         <Pressable
-                            onPress={()=> console.log('Delete store function')}
+                            onPress={()=> deleteStore(store.storeId)}
                         >
                             <MaterialIcons 
                                 style={styles.delete} 
