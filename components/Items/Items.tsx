@@ -17,7 +17,7 @@ const Items: React.FC = () => {
     const [newStoreName, setNewStoreName] = useState<string>("");
 
 
-    //useEffect to fetch stores abd add them to the storeList useState. Might need to update to ensure it is called whenever the storeList is updated. 
+    //useEffect to fetch stores and add them to the storeList useState. Might need to update to ensure it is called whenever the storeList is updated. 
 
     useEffect(() => {
         const fetchStores = async() => {
@@ -71,7 +71,7 @@ const Items: React.FC = () => {
                         <TextInput
                             style={styles.editTextInput}
                             value={newStoreName}
-                            onChangeText={(newStoreName) => setNewStoreName(newStoreName)}
+                            onChangeText={() => setNewStoreName(newStoreName)}
                         />
                     ):(
                         <View style={styles.checkboxContainer} >
@@ -87,7 +87,9 @@ const Items: React.FC = () => {
                     {/* Conditional - Update | Edit */}
                     <View style={styles.updateView}>
                     {editingStoreIndex === index ? (
-                        <Pressable onPress={() => console.log('Edit store function')}>
+
+                        // editStore function
+                        <Pressable onPress={() => editStore(store.storeId, newStoreName)}>
                             <Text>Update</Text>
                         </Pressable>):(
                         <Pressable>
