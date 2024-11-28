@@ -105,7 +105,7 @@ const Items: React.FC = () => {
 
                         // editStore function
                         <Pressable onPress={() => editStore(store.storeId, newStoreName)}>
-                            <Text>Update</Text>
+                            <Text style={styles.buttonText} >Update</Text>
                         </Pressable>):(
                         <Pressable>
                             <Feather 
