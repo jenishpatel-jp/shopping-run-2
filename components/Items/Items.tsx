@@ -12,11 +12,9 @@ import { addItem } from '@/models/Items';
 Things to do: 
 
 - Edit store function button is not working 
-- The store texts are black and small 
-- 'Enter Item' placeholder text is not orange 
+- Update button does not work
+- The checkbox button doesn't work
 - 
-
-
 */
 
 
@@ -91,7 +89,7 @@ const Items: React.FC = () => {
                         <View style={styles.checkboxContainer} >
                             <CustomCheckbox
                                 key={index}
-                                onPress={() => setEditingStoreIndex(index)}
+                                onPress={() => selectStoreFunction(store.storeName)}
                                 checked={ selectedStore === store.storeName }
                             />
                             <Text style={styles.checkbox}>{store.storeName}</Text>
