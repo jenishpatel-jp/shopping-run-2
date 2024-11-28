@@ -13,6 +13,8 @@ Things to do:
 
 - Edit store function button is not working 
 - The store texts are black and small 
+- 'Enter Item' placeholder text is not orange 
+- 
 
 
 */
@@ -68,6 +70,7 @@ const Items: React.FC = () => {
             <TextInput
             placeholder='Enter Item'
             style={styles.textInput}
+            placeholderTextColor={"#F5A418"}
             textAlign='center'
             value={itemName}
             onChangeText={setItemName}

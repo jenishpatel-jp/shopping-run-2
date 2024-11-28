@@ -1,7 +1,7 @@
 import React from 'react'
 import Items from '../../components/Items/Items'
 import Lists from '../../components/Lists/Lists';
-import Store from '../../components/Store/Store';
+import Store from '../../components/Items/Store/Store';
 import ResetButton from '../../components/Buttons/resetButton';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ListRenderItem } from 'react-native';
