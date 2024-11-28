@@ -14,6 +14,7 @@ Things to do:
 - Edit store function button is not working 
 - Update button does not work
 - The checkbox button doesn't work
+- Need to ensure the update button also sets the newStoreName back to ""
 - 
 */
 
@@ -82,8 +83,9 @@ const Items: React.FC = () => {
                     {editingStoreIndex === index ? (
                         <TextInput
                             style={styles.editTextInput}
+                            placeholder={store.storeName}
                             value={newStoreName}
-                            onChangeText={() => setNewStoreName(newStoreName)}
+                            onChangeText={setNewStoreName}
                         />
                     ):(
                         <View style={styles.checkboxContainer} >
@@ -108,7 +110,9 @@ const Items: React.FC = () => {
                             <Feather 
                                 style={styles.edit} 
                                 name='edit' size={26} 
-                                color='#F5A418'/>
+                                color='#F5A418'
+                                onPress={() => setEditingStoreIndex(index)}
+                                />
                         </Pressable>    
                         )}
                         <Pressable
