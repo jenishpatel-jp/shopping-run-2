@@ -86,6 +86,7 @@ const Items: React.FC = () => {
                             placeholder={store.storeName}
                             value={newStoreName}
                             onChangeText={setNewStoreName}
+                            placeholderTextColor={"#F5A418"}
                         />
                     ):(
                         <View style={styles.checkboxContainer} >
