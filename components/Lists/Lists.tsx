@@ -26,31 +26,15 @@ const Lists: React.FC<ListsProps> = ({
     setNewItemName
 }) => {
 
-    // //useState to determine which item has been selected
-    // const [selectedItem, setSelectedItem] = useState<string | null>(null);
+    //useState to determine which item has been selected
+    const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
 
-    // /* 
-    // function checks of items once clicked. 
-    // Sets the item as completed, deletes it from the Shopping List and set the selected item back to null. 
-    // */
-    // const checkOffItem = (item: string) => {
-    //     setCompletedItem([...completedItem, item]);
-    //     deleteItemFromShoppingList(item);
-    //     setSelectedItem(null);
-    // };
+    /* Check off functoion   */
 
-    // //Function deletes the item from the Shopping List 
-    // const deleteItemFromShoppingList = (item: string) => {
-    //     for (const store in shoppingList) {
-    //         if (shoppingList[store].includes(item)) {
-    //             deleteItem(store, item);
-    //             break;
-    //         }
-    //     }
-    // };
 
-    // // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 
+
+    // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 
     // const sections: Section[] = Object.keys(shoppingList).map((store) => ({
     //     title: store,
     //     data: shoppingList[store]

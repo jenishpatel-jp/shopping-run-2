@@ -29,21 +29,6 @@ const Items: React.FC = () => {
     const [newStoreName, setNewStoreName] = useState<string>("");
 
 
-    //useEffect to fetch stores and add them to the storeList useState. Might need to update to ensure it is called whenever the storeList is updated. 
-
-    useEffect(() => {
-        const fetchStores = async() => {
-            try {
-                const allStores = await getStores();
-                setStores(allStores);
-            }catch(error){
-                console.error('Error fetching stores:', error)
-            }
-        }
-
-        fetchStores();
-    }, [stores]);
-
     //Function to add an item to the store
     const handleAddItem = (storeId: number, itemName: string) => {
         if (selectedStore && itemName) {
@@ -79,7 +64,7 @@ const Items: React.FC = () => {
             {stores.map( (store, index) => (
                 <View key={index} style={styles.storeContainer}>
 
-                    {/* Conditonal - Text input | store name */}
+                    {/* Conditonal - Text input | Store name */}
                     {editingStoreIndex === index ? (
                         <TextInput
                             style={styles.editTextInput}
