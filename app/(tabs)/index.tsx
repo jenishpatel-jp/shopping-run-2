@@ -13,7 +13,7 @@ import { setUpItemsTable, addItem } from '@/models/Items';
 export default function ShoppingRun(){
 
   const [newItemName, setNewItemName] = useState<string>("");
-  const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([])
+  const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
 
   interface ListItem {
     key: string, 
@@ -25,7 +25,9 @@ export default function ShoppingRun(){
       <Store />
     },
     { key: 'items', component:
-      <Items />
+      <Items 
+        stores={stores}
+      />
     },
     { key: 'lists', component:
       <Lists 

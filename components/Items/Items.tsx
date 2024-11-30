@@ -18,12 +18,17 @@ Things to do:
 - 
 */
 
+interface ItemsProps {
+    stores: { storeId: number, storeName: string }[];
+}
 
-const Items: React.FC = () => {
+
+const Items: React.FC<ItemsProps> = ({
+    stores
+}) => {
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
-    const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
     const [selectedStore, setSelectedStore] = useState<string | null>();
     const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
     const [newStoreName, setNewStoreName] = useState<string>("");
