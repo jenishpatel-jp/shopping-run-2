@@ -52,6 +52,12 @@ const Items: React.FC<ItemsProps> = ({
         }
     };
 
+    const editFunction = ( storeId: number, storeName:string ) => {
+        editStore(storeId, storeName);
+        setNewStoreName("");
+        setEditingStoreIndex(null);
+    }
+
     return (
         <View style={styles.card}>
 
