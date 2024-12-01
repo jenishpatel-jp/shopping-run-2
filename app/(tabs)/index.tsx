@@ -12,7 +12,6 @@ import { setUpItemsTable, getItems } from '@/models/Items';
 
 export default function ShoppingRun(){
 
-  const [newItemName, setNewItemName] = useState<string>("");
   const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
   const [items, setItems] = useState< {itemId: number; storeId: number; itemName: string; completed: number}[] >([])
 
@@ -32,8 +31,6 @@ export default function ShoppingRun(){
     },
     { key: 'lists', component:
       <Lists 
-        newItemName={newItemName}
-        setNewItemName={setNewItemName}
       />
     },
     {key: 'reset', component:
@@ -69,7 +66,19 @@ export default function ShoppingRun(){
     fetchStores();
 }, [stores]);
 
-  //possibly use getAllAsync or something similar to get the stores from the database. 
+  useEffect(() => {
+    const fetchItems = async() => {
+      try {
+        const allItems = await getItems();
+        setItems(allItems);
+
+      } catch(error){
+        console.error('Error fetching items:', error)
+      }
+    };
+    fetchItems();
+  }, [items]);
+
 
   return (
     <SafeAreaProvider >

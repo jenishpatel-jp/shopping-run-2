@@ -11,8 +11,7 @@ lists out each store and what items are allocated to that store
 */
 
 interface ListsProps {
-    newItemName: string;
-    setNewItemName: (name: string) => void;
+
 }
 
 // interface for the section that is created which has a key object of title and data. 
@@ -21,10 +20,7 @@ interface Section {
     data: string[];
 }
 
-const Lists: React.FC<ListsProps> = ({
-    newItemName,
-    setNewItemName
-}) => {
+const Lists: React.FC<ListsProps> = () => {
 
     //useState to determine which item has been selected
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
