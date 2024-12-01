@@ -120,3 +120,51 @@ export const getItems = async ()=> {
         return [];
     }
 }
+
+
+// Get the incomplete items for each Store
+
+type StoreWithItems = {
+    storeName: string;
+    items: string[];
+}
+
+export const getStoresWithIncompleteItems = async() => {
+    try {
+        const db = await openDatabase();
+
+        const query = `
+            SELECT 
+                stores.storeName,
+                items.itemName
+            FROM 
+                stores
+            LEFT JOIN
+                items
+            ON
+                stores.storesId = items.storesId
+            WHERE 
+                items.completed = 0
+        `;
+
+        const rows = await db.getAllAsync(query);
+
+        const result: StoreWithItems[] = [];
+        rows.forEach((row: any) => {
+            const existingStore = result.find(store => store.storeName === row.storeName);
+
+            if (existingStore){
+                existingStore.items.push(row.itemName);
+            } else {
+                result.push({
+                    storeName: row.storeName,
+                    items: row.itemName ? [row.itemName] : []
+                });
+            }
+        });
+        return result;
+    } catch(error){
+        console.error('Error getting items for Stores with Incomplete items');
+        return [];
+    }
+}

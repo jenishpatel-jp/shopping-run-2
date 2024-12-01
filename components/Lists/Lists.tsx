@@ -27,7 +27,7 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
 
-    /* Check off functoion   */
+    /* Check off function   */
 
     /* Need to import the items  */
 
