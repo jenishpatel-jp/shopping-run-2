@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import { styles } from './ItemStyles';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
-import { addStore, editStore, deleteStore, getStores } from '@/models/Store';
+import { editStore, deleteStore } from '@/models/Store';
 import { addItem } from '@/models/Items';
 
 
