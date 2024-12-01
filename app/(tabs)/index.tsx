@@ -30,7 +30,9 @@ export default function ShoppingRun(){
       />
     },
     { key: 'lists', component:
-      <Lists 
+      <Lists
+        stores={stores}
+        items={items} 
       />
     },
     {key: 'reset', component:
