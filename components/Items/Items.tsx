@@ -100,7 +100,7 @@ const Items: React.FC<ItemsProps> = ({
                     {editingStoreIndex === index ? (
 
                         // editStore function
-                        <Pressable onPress={() => editStore(store.storeId, newStoreName)}>
+                        <Pressable onPress={() => editFunction(store.storeId, newStoreName)}>
                             <Text style={styles.buttonText} >Update</Text>
                         </Pressable>):(
                         <Pressable>
