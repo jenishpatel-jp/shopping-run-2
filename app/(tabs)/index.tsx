@@ -8,12 +8,13 @@ import { StyleSheet, View, FlatList, ListRenderItem } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { openDatabase } from '@/lib/db';
 import { setUpStoresTable, getStores } from '@/models/Store';
-import { setUpItemsTable, addItem } from '@/models/Items';
+import { setUpItemsTable, getItems } from '@/models/Items';
 
 export default function ShoppingRun(){
 
   const [newItemName, setNewItemName] = useState<string>("");
   const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
+  const [items, setItems] = useState< {itemId: number; storeId: number; itemName: string; completed: number}[] >([])
 
   interface ListItem {
     key: string, 
@@ -48,12 +49,14 @@ export default function ShoppingRun(){
     </View>
   );
 
+  //useEffect to open the database and create Stores and Items table on mount
   useEffect(() => {
     openDatabase();
     setUpStoresTable();
     setUpItemsTable();
   }, []);
 
+  //useEffect to fetch the stores from the Stores database and add it to the store useState. 
   useEffect(() => {
     const fetchStores = async() => {
         try {
