@@ -32,6 +32,7 @@ const Lists: React.FC<ListsProps> = ({
 
     /* Check off functoion   */
 
+    /* Need to import the items  */
 
 
     // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 

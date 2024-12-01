@@ -99,3 +99,24 @@ export const deleteAllItems = async () => {
         console.error('Error deleting all the items', error);
     }
 };
+
+
+//Get the items from the Database
+
+type ItemRow = {
+    itemId : number; 
+    storeId: number;
+    itemName: string;
+    completed: number;
+}
+
+export const getItems = async ()=> {
+    try {
+        const db = await openDatabase();
+        const allRows: ItemRow[] = await db.getAllAsync('SELECT * FROM items');
+        return allRows;
+    } catch (error){
+        console.error('Error getting the item', Error);
+        return [];
+    }
+}
