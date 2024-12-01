@@ -4,6 +4,8 @@ import { styles } from './ListStyles';
 import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { getStoresWithIncompleteItems } from '@/models/Items';
+
 
 /*
 Shopping list component
