@@ -16,26 +16,25 @@ const Items: React.FC<ItemsProps> = ({
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
-    const [selectedStore, setSelectedStore] = useState<string | null>(null);
-    const [selectedStoreId, setSelectedStoreId] = useState<number>(0);
     const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
     const [newStoreName, setNewStoreName] = useState<string>("");
+    const [selectedStore, setSelectedStore] = useState<{storeId: number, storeName:string} | null>(null);
 
 
     //Function to add an item to the store
-    const handleAddItem = (storeId: number, itemName: string) => {
+    const handleAddItem = (itemName: string) => {
         if (selectedStore && itemName) {
-            //add item function here
-            addItem(storeId, itemName)
+            addItem(selectedStore.storeId, itemName)
             setItemName("");
+        } else {
+            console.warn("No store selected or item name is empty")
         }
     };
 
     //Function to select which store has been selected
-    const selectStoreFunction = (store: string, id: number) => {
-        if (!selectedStore){
-            setSelectedStore(store);
-            setSelectedStoreId(id);
+    const selectStoreFunction = (storeId: number, storeName:string) => {
+        if (!selectedStore || selectedStore.storeId !== storeId){
+            setSelectedStore({ storeId, storeName })
         } else {
             setSelectedStore(null);
         }
@@ -62,8 +61,8 @@ const Items: React.FC<ItemsProps> = ({
 
             {/* Mapping  each store*/}
             {stores.map( (store, index) => (
-                <View key={index} style={styles.storeContainer}>
 
+                <View key={index} style={styles.storeContainer}>
                     {/* Conditonal - Text input | Store name */}
                     {editingStoreIndex === index ? (
                         <TextInput
@@ -77,12 +76,13 @@ const Items: React.FC<ItemsProps> = ({
                         <View style={styles.checkboxContainer} >
                             <CustomCheckbox
                                 key={index}
-                                onPress={() => selectStoreFunction(store.storeName, store.storeId)}
-                                checked={ selectedStore === store.storeName }
+                                onPress={() => selectStoreFunction(store.storeId, store.storeName)}
+                                checked={ store.storeName === store.storeName }
                             />
                             <Text style={styles.checkbox}>{store.storeName}</Text>
                         </View>
                     )} 
+
 
                     {/* Conditional - Update | Edit */}
                     <View style={styles.updateView}>
@@ -111,7 +111,8 @@ const Items: React.FC<ItemsProps> = ({
                                 color="#F5A418"
                                 />
                         </Pressable>
-                </View>
+                    </View>
+
                 </View>
                 ))}
 
@@ -119,13 +120,13 @@ const Items: React.FC<ItemsProps> = ({
 
                 <View style={styles.addButtonContainer}>
                     <Pressable
-                        onPress={()=> addItem(selectedStoreId, itemName)}
+                        onPress={()=> handleAddItem(itemName)}
                         onPressIn={()=> setButtonPressed(true)}
                         onPressOut={(()=> setButtonPressed(false))}
                     >
-                    <Text style={styles.buttonText}>
-                        Add
-                    </Text>
+                        <Text style={styles.buttonText}>
+                            Add
+                        </Text>
                     </Pressable>
                     
                 </View>
