@@ -6,22 +6,9 @@ import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { editStore, deleteStore } from '@/models/Store';
 import { addItem } from '@/models/Items';
 
-
-/* 
-
-Things to do: 
-
-- Edit store function button is not working 
-- Update button does not work
-- The checkbox button doesn't work
-- Need to ensure the update button also sets the newStoreName back to ""
-- 
-*/
-
 interface ItemsProps {
     stores: { storeId: number, storeName: string }[];
 }
-
 
 const Items: React.FC<ItemsProps> = ({
     stores
@@ -29,7 +16,8 @@ const Items: React.FC<ItemsProps> = ({
 
     const [buttonPressed, setButtonPressed] = useState(false);
     const [itemName, setItemName] = useState<string>("");
-    const [selectedStore, setSelectedStore] = useState<string | null>();
+    const [selectedStore, setSelectedStore] = useState<string | null>(null);
+    const [selectedStoreId, setSelectedStoreId] = useState<number>(0);
     const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
     const [newStoreName, setNewStoreName] = useState<string>("");
 
@@ -38,15 +26,16 @@ const Items: React.FC<ItemsProps> = ({
     const handleAddItem = (storeId: number, itemName: string) => {
         if (selectedStore && itemName) {
             //add item function here
-            addItem(storeId,itemName)
+            addItem(storeId, itemName)
             setItemName("");
         }
     };
 
     //Function to select which store has been selected
-    const selectStoreFunction = (store: string) => {
+    const selectStoreFunction = (store: string, id: number) => {
         if (!selectedStore){
-            setSelectedStore(store)
+            setSelectedStore(store);
+            setSelectedStoreId(id);
         } else {
             setSelectedStore(null);
         }
@@ -88,7 +77,7 @@ const Items: React.FC<ItemsProps> = ({
                         <View style={styles.checkboxContainer} >
                             <CustomCheckbox
                                 key={index}
-                                onPress={() => selectStoreFunction(store.storeName)}
+                                onPress={() => selectStoreFunction(store.storeName, store.storeId)}
                                 checked={ selectedStore === store.storeName }
                             />
                             <Text style={styles.checkbox}>{store.storeName}</Text>
@@ -130,7 +119,7 @@ const Items: React.FC<ItemsProps> = ({
 
                 <View style={styles.addButtonContainer}>
                     <Pressable
-                        onPress={()=> console.log("Add item")}
+                        onPress={()=> addItem(selectedStoreId, itemName)}
                         onPressIn={()=> setButtonPressed(true)}
                         onPressOut={(()=> setButtonPressed(false))}
                     >
