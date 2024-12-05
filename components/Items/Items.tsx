@@ -24,17 +24,17 @@ const Items: React.FC<ItemsProps> = ({
     //Function to add an item to the store
     const handleAddItem = (itemName: string) => {
         if (selectedStore && itemName) {
-            addItem(selectedStore.storeId, itemName)
+            addItem(selectedStore.storeId, itemName);
             setItemName("");
         } else {
-            console.warn("No store selected or item name is empty")
+            console.warn("No store selected or item name is empty");
         }
     };
 
     //Function to select which store has been selected
     const selectStoreFunction = (storeId: number, storeName:string) => {
         if (!selectedStore || selectedStore.storeId !== storeId){
-            setSelectedStore({ storeId, storeName })
+            setSelectedStore({ storeId, storeName });
         } else {
             setSelectedStore(null);
         }
