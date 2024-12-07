@@ -1,4 +1,5 @@
 import { openDatabase } from "@/lib/db";
+import { store } from "expo-router/build/global-state/router-store";
 
 export const setUpItemsTable = async () => {
     try {
@@ -149,22 +150,27 @@ export const getStoresWithIncompleteItems = async() => {
 
         const rows = await db.getAllAsync(query);
 
-        const result: StoreWithItems[] = [];
-        rows.forEach((row: any) => {
-            const existingStore = result.find(store => store.storeName === row.storeName);
+        // Transfor the result into the desired output format
+        const result: Record<string, string[]> = {};
 
-            if (existingStore){
-                existingStore.items.push(row.itemName);
-            } else {
-                result.push({
-                    storeName: row.storeName,
-                    items: row.itemName ? [row.itemName] : []
-                });
+        rows.forEach((row: any) => {
+            const storeName = row.storeName;
+            const itemName = row.itemName;
+
+            if (!result[storeName]){
+                result[storeName] = [];
+            }
+
+            if (itemName) {
+                result[storeName].push(itemName);
             }
         });
+
         return result;
+
+        
     } catch(error){
         console.error('Error getting items for Stores with Incomplete items');
-        return [];
+        return {};
     }
 }
