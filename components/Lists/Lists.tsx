@@ -26,7 +26,10 @@ interface Section {
 const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
 
     //useState to determine which item has been selected
+    const [incompleteItems, setIncompleteItems] = useState<Record<string, string[]>> ();
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+    //Need to create a useState that stores the objects {store: [item, item, item]}
 
 
     /* Check off function   */
