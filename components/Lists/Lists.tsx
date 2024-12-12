@@ -26,7 +26,7 @@ interface Section {
 const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
 
     //useState to determine which item has been selected
-    const [incompleteItems, setIncompleteItems] = useState<Record<string, string[]>>();
+    const [incompleteItems, setIncompleteItems] = useState<Record<string, string[]>>({});
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
     //Need to create a useState that stores the objects {store: [item, item, item]}
@@ -41,14 +41,9 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
             }
         }
 
+        fetchIncompleteItems();
 
     }, [incompleteItems])
-
-
-    /* Check off function   */
-
-    /* Need to import the items  */
-
 
     // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 
     // const sections: Section[] = Object.keys(shoppingList).map((store) => ({
@@ -60,6 +55,11 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
     // if (completedItem.length > 0) {
     //     sections.push({ title: 'Completed', data: completedItem });
     // }
+
+    const sections: Section[] = Object.keys(incompleteItems).map((store) => ({
+        title:store,
+        data: incompleteItems[store]
+    }))
 
     return (
         <View>
