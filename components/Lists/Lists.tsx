@@ -62,9 +62,19 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
     }))
 
     return (
-        <View>
-            <Text>Temporary</Text>
-        </View>
+        <SectionList 
+            sections={sections}
+            renderSectionHeader={( {section} ) => (
+                <Text style={styles.storeName}>{section.title}</Text>
+            )}
+            renderItem={( { item, section } ) => (
+                <View>
+                    
+                </View>
+            )}
+        />
+
+
         // Uses the SectionList component to render the header and list
         // <SectionList
         //     sections={sections}
