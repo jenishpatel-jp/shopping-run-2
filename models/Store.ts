@@ -89,7 +89,7 @@ export const getStores = async (): Promise<StoreRow[]> => {
         const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
         return allRows;
     } catch(error) {
-        console.error('Error getting the stores', Error);
+        console.error('Error getting the stores', error);
         return [];
     }
 }
