@@ -43,7 +43,7 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
 
         fetchIncompleteItems();
 
-    }, [incompleteItems])
+    }, [])
 
     // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list. 
     // const sections: Section[] = Object.keys(shoppingList).map((store) => ({
@@ -68,8 +68,24 @@ const Lists: React.FC<ListsProps> = ( { stores, items } ) => {
                 <Text style={styles.storeName}>{section.title}</Text>
             )}
             renderItem={( { item, section } ) => (
-                <View>
-                    
+
+                // Still need to code how a completed item would look like 
+                
+                <View style={styles.itemsContainer}>
+                    <View style={styles.checkboxContainer}>
+                        <Checkbox 
+                            style={styles.checkbox}
+                            onValueChange={() => console.log("Checkbox has been checked")}
+                        />
+                    </View>
+                    <View >
+                        <Pressable>
+                            <MaterialIcons style={styles.delete} name='delete-outline' size={30} color="#F5A418"/>
+                        </Pressable>
+
+                    </View>
+
+
                 </View>
             )}
         />

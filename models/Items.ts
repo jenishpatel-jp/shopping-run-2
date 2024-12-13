@@ -143,7 +143,7 @@ export const getStoresWithIncompleteItems = async() => {
             LEFT JOIN
                 items
             ON
-                stores.storesId = items.storesId
+                stores.storeId = items.storeId
             WHERE 
                 items.completed = 0
         `;
