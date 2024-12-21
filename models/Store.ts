@@ -85,11 +85,11 @@ type StoreRow = {
 
 export const getStores = async (): Promise<StoreRow[]> => {
     try {
-        console.log('Opening database...')
+        // console.log('Opening database...')
         const db = await openDatabase();
-        console.log('Database opened. Feching rows...')
+        // console.log('Database opened. Feching rows...')
         const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
-        console.log('Fetched rows:', allRows);
+        // console.log('Fetched rows:', allRows);
         return allRows;
     } catch(error) {
         console.error('Error getting the stores', error);

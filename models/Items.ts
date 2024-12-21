@@ -117,7 +117,7 @@ export const getItems = async ()=> {
         const allRows: ItemRow[] = await db.getAllAsync('SELECT * FROM items');
         return allRows;
     } catch (error){
-        console.error('Error getting the item', Error);
+        console.error('Error getting the item', error);
         return [];
     }
 }
