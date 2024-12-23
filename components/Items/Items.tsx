@@ -88,7 +88,7 @@ const Items: React.FC<ItemsProps> = ({ stores }) => {
                 }
                 checked={isStoreSelected() === store.storeName}
               />
-              <Text style={styles.checkbox}>{store.storeName}</Text>
+              <Text style={styles.checkboxText}>{store.storeName}</Text>
             </View>
           )}
 
