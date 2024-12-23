@@ -40,10 +40,19 @@ const Items: React.FC<ItemsProps> = ({
         }
     };
 
+    //Function to edit a store 
     const editFunction = ( storeId: number, storeName:string ) => {
         editStore(storeId, storeName);
         setNewStoreName("");
         setEditingStoreIndex(null);
+    };
+
+
+    // Code added to ensure null is not returned so I can toggle the checkbox
+    const isStoreSelected = () => {
+        if (selectedStore){
+            return selectedStore.storeName;
+        } 
     }
 
     return (
@@ -77,7 +86,7 @@ const Items: React.FC<ItemsProps> = ({
                             <CustomCheckbox
                                 key={index}
                                 onPress={() => selectStoreFunction(store.storeId, store.storeName)}
-                                checked={ store.storeName === store.storeName }
+                                checked={ isStoreSelected() === store.storeName }
                             />
                             <Text style={styles.checkbox}>{store.storeName}</Text>
                         </View>
