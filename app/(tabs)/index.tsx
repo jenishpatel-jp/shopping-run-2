@@ -55,7 +55,7 @@ export default function ShoppingRun() {
       }
     };
     fetchStores();
-  }, [stores]);
+  }, []);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -67,7 +67,7 @@ export default function ShoppingRun() {
       }
     };
     fetchItems();
-  }, [items]);
+  }, []);
 
   return (
     <SafeAreaProvider>

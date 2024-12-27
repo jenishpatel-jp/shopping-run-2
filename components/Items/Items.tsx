@@ -86,7 +86,7 @@ const Items: React.FC<ItemsProps> = ({ stores }) => {
                 onPress={() =>
                   selectStoreFunction(store.storeId, store.storeName)
                 }
-                checked={isStoreSelected() === store.storeName}
+                checked={store.storeName === store.storeName}
               />
               <Text style={styles.checkboxText}>{store.storeName}</Text>
             </View>
