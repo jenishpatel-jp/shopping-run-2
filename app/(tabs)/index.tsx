@@ -11,12 +11,10 @@ import { setUpStoresTable, getStores } from "@/models/StoreModel";
 import { setUpItemsTable, getItems } from "@/models/ItemsModel";
 
 export default function ShoppingRun() {
-  const [stores, setStores] = useState<
-    { storeId: number; storeName: string }[]
-  >([]);
-  const [items, setItems] = useState<
-    { itemId: number; storeId: number; itemName: string; completed: number }[]
-  >([]);
+  const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
+  const [items, setItems] = useState<{ itemId: number; storeId: number; itemName: string; completed: number }[]>([]);
+  const [storeFetchTrigger, setStoreFetchTrigger] = useState(false);
+  const [itemFetchTrigger, setItemFetchTrigger] = useState(false);
 
   interface ListItem {
     key: string;
@@ -55,7 +53,7 @@ export default function ShoppingRun() {
       }
     };
     fetchStores();
-  }, []);
+  }, [storeFetchTrigger]);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -67,7 +65,7 @@ export default function ShoppingRun() {
       }
     };
     fetchItems();
-  }, []);
+  }, [itemFetchTrigger]);
 
   return (
     <SafeAreaProvider>
