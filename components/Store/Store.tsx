@@ -11,8 +11,11 @@ The component should allow you to enter a store name and click Add to save the s
 The add button needs a function that allows you to add the store to the database. 
 
 */
+interface storeProps {
+  setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Store = () => {
+const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
   //The Store component is responsible for adding stores and editing stores
 
   //The storeName useState will store the name of the store temporarily before it is added to the Database.
