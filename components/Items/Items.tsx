@@ -48,7 +48,7 @@ const Items: React.FC<ItemsProps> = ({ stores }) => {
     setEditingStoreIndex(null);
   };
 
-  // Code added to ensure null is not returned so I can toggle the checkbox
+  // Code added to ensure null is not returned so I can toggle the checkbox on and off when selected
   const isStoreSelected = () => {
     if (selectedStore) {
       return selectedStore.storeName;
