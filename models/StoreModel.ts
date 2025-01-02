@@ -52,13 +52,14 @@ export const editStore = async (storeId: number, storeName: string, callback?: (
         } else {
             console.log(`No store found with ID ${storeId} to update`)
         }
+        if (callback)callback();
     } catch (error){
         console.error('Error edditing store:', error);
     }
 };
 
 // Delete a store by ID
-export const deleteStore = async (storeId: number) => {
+export const deleteStore = async (storeId: number, callback?: ()=> void) => {
     try {
         const db = await openDatabase();
 
@@ -72,6 +73,8 @@ export const deleteStore = async (storeId: number) => {
         } else {
             console.log(`No store found with ID ${storeId} to delete.`);
         }
+
+        if(callback)callback();
     } catch(error){
         console.error('Error deleting the store', error);
     }
