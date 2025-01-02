@@ -23,7 +23,7 @@ export default function ShoppingRun() {
 
   const data: ListItem[] = [
     { key: "store", component: <Store setStoreFetchTrigger={setStoreFetchTrigger}/> },
-    { key: "items", component: <Items stores={stores} /> },
+    { key: "items", component: <Items stores={stores} setItemFetchTrigger={setItemFetchTrigger} /> },
     { key: "lists", component: <Lists stores={stores} items={items} /> },
     {
       key: "reset",

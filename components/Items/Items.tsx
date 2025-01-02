@@ -8,6 +8,7 @@ import { addItem } from "@/models/ItemsModel";
 
 interface ItemsProps {
   stores: { storeId: number; storeName: string }[];
+  setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Items: React.FC<ItemsProps> = ({ stores }) => {
