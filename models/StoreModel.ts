@@ -30,8 +30,9 @@ export const addStore = async(storeName: string, callback?: ()=> void) => {
         );
 
         console.log(`Store added successfully with ID: ${result.lastInsertRowId}, ${result.changes}`);
-        if (callback) callback();
 
+        // Trigger the callback function if it is provided
+        if (callback) callback();
     } catch (error){
         console.error('Error adding store:', error)
     }
@@ -52,6 +53,8 @@ export const editStore = async (storeId: number, storeName: string, callback?: (
         } else {
             console.log(`No store found with ID ${storeId} to update`)
         }
+
+        // Trigger the callback function if it is provided
         if (callback)callback();
     } catch (error){
         console.error('Error edditing store:', error);
@@ -74,6 +77,7 @@ export const deleteStore = async (storeId: number, callback?: ()=> void) => {
             console.log(`No store found with ID ${storeId} to delete.`);
         }
 
+        // Trigger the callback function if it is provided
         if(callback)callback();
     } catch(error){
         console.error('Error deleting the store', error);
