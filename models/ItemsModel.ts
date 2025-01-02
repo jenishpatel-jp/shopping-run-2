@@ -1,5 +1,4 @@
 import { openDatabase } from "@/lib/db";
-import { store } from "expo-router/build/global-state/router-store";
 
 export const setUpItemsTable = async () => {
     try {
@@ -25,7 +24,7 @@ export const setUpItemsTable = async () => {
 };
 
 // Add a new item to the items database
-export const addItem = async (storeId: number, itemName: string, completed: number = 0) => {
+export const addItem = async (storeId: number, itemName: string, completed: number = 0, callback: ()=> void) => {
     try {
         const db = await openDatabase(); //open the database
 
@@ -34,7 +33,9 @@ export const addItem = async (storeId: number, itemName: string, completed: numb
             [storeId, itemName, completed]
         );
 
-        console.log(`Item added successfully with ID: ${result.lastInsertRowId, result.changes}`)
+        console.log(`Item added successfully with ID: ${result.lastInsertRowId, result.changes}`);
+
+        if (callback)callback(); 
 
     } catch (error){
         console.error('Error adding item:', error);

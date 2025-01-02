@@ -11,12 +11,10 @@ interface ItemsProps {
   setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Items: React.FC<ItemsProps> = ({ stores }) => {
+const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [itemName, setItemName] = useState<string>("");
-  const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(
-    null
-  );
+  const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
   const [newStoreName, setNewStoreName] = useState<string>("");
   const [selectedStore, setSelectedStore] = useState<{
     storeId: number;
@@ -26,7 +24,7 @@ const Items: React.FC<ItemsProps> = ({ stores }) => {
   //Function to add an item to the store
   const handleAddItem = (itemName: string) => {
     if (selectedStore && itemName) {
-      addItem(selectedStore.storeId, itemName);
+      addItem(selectedStore.storeId, itemName, 0, () => setItemFetchTrigger((prev) => !prev));
       setItemName("");
     } else {
       console.warn("No store selected or item name is empty");
