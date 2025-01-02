@@ -20,7 +20,7 @@ export const setUpStoresTable = async () => {
 };
 
 // Add a new store to the database
-export const addStore = async(storeName: string) => {
+export const addStore = async(storeName: string, callback?: ()=> void) => {
     try {
         const db = await openDatabase(); //open the database
 
@@ -30,6 +30,7 @@ export const addStore = async(storeName: string) => {
         );
 
         console.log(`Store added successfully with ID: ${result.lastInsertRowId}, ${result.changes}`);
+        if (callback) callback();
 
     } catch (error){
         console.error('Error adding store:', error)
@@ -37,7 +38,7 @@ export const addStore = async(storeName: string) => {
 };
 
 // Edit a store's name by its ID
-export const editStore = async (storeId: number, storeName: string) => {
+export const editStore = async (storeId: number, storeName: string, callback?: ()=> void) => {
     try {
         const db = await openDatabase();
 
@@ -83,13 +84,14 @@ type StoreRow = {
     storeName: string;
 };
 
-export const getStores = async (): Promise<StoreRow[]> => {
+export const getStores = async ( callback?: ()=>void ): Promise<StoreRow[]> => {
     try {
         // console.log('Opening database...')
         const db = await openDatabase();
         // console.log('Database opened. Feching rows...')
         const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
         // console.log('Fetched rows:', allRows);
+        if(callback)callback();
         return allRows;
     } catch(error) {
         console.error('Error getting the stores', error);

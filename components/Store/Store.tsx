@@ -3,14 +3,7 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "./StoreStyles";
 import { addStore } from "@/models/StoreModel";
 
-/*
-~~~ The Store Component ~~~ 
 
-The component should allow you to enter a store name and click Add to save the store in the database. 
-
-The add button needs a function that allows you to add the store to the database. 
-
-*/
 interface storeProps {
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -23,6 +16,12 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
 
   //buttonPressed useState will determine what colour the button will be when pressed
   const [buttonPressed, setButtonPressed] = useState(false);
+
+  //function to handle how stores are added to the database. 
+  const handleAddStore = async () => {
+    await addStore(storeName, () => setStoreFetchTrigger((prev) => !prev));
+    setStoreName("");
+  }
 
   return (
     <View style={styles.card}>
