@@ -8,18 +8,16 @@ import { addItem } from "@/models/ItemsModel";
 
 interface ItemsProps {
   stores: { storeId: number; storeName: string }[];
-  setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>
+  setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
+  setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
+const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetchTrigger }) => {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [itemName, setItemName] = useState<string>("");
   const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
   const [newStoreName, setNewStoreName] = useState<string>("");
-  const [selectedStore, setSelectedStore] = useState<{
-    storeId: number;
-    storeName: string;
-  } | null>(null);
+  const [selectedStore, setSelectedStore] = useState<{storeId: number; storeName: string;} | null>(null);
 
   //Function to add an item to the store
   const handleAddItem = (itemName: string) => {
@@ -41,8 +39,8 @@ const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
   };
 
   //Function to edit a store
-  const editFunction = (storeId: number, storeName: string) => {
-    editStore(storeId, storeName);
+  const handleEditStore = async (storeId: number, storeName: string) => {
+    await editStore(storeId, storeName, () => setStoreFetchTrigger((prev) => !prev));
     setNewStoreName("");
     setEditingStoreIndex(null);
   };
@@ -52,6 +50,10 @@ const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
     if (selectedStore) {
       return selectedStore.storeName;
     }
+  };
+
+  const handleDeleteStore = async (storeId: number) => {
+    await deleteStore(storeId, () => setStoreFetchTrigger((prev) => !prev));
   };
 
   return (
@@ -96,7 +98,7 @@ const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
             {editingStoreIndex === index ? (
               // editStore function
               <Pressable
-                onPress={() => editFunction(store.storeId, newStoreName)}
+                onPress={() => handleEditStore(store.storeId, newStoreName)}
               >
                 <Text style={styles.buttonText}>Update</Text>
               </Pressable>
@@ -111,7 +113,7 @@ const Items: React.FC<ItemsProps> = ({ stores, setItemFetchTrigger }) => {
                 />
               </Pressable>
             )}
-            <Pressable onPress={() => deleteStore(store.storeId)}>
+            <Pressable onPress={() => handleDeleteStore(store.storeId)}>
               <MaterialIcons
                 style={styles.delete}
                 name="delete-outline"
