@@ -87,14 +87,13 @@ type StoreRow = {
     storeName: string;
 };
 
-export const getStores = async ( callback?: ()=>void ): Promise<StoreRow[]> => {
+export const getStores = async (): Promise<StoreRow[]> => {
     try {
         // console.log('Opening database...')
         const db = await openDatabase();
         // console.log('Database opened. Feching rows...')
         const allRows: StoreRow[] = await db.getAllAsync('SELECT * FROM stores');
         // console.log('Fetched rows:', allRows);
-        if(callback)callback();
         return allRows;
     } catch(error) {
         console.error('Error getting the stores', error);
