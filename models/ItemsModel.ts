@@ -24,7 +24,7 @@ export const setUpItemsTable = async () => {
 };
 
 // Add a new item to the items database
-export const addItem = async (storeId: number, itemName: string, completed: number = 0, callback: ()=> void) => {
+export const addItem = async (storeId: number, itemName: string, completed: number = 0, callback?: ()=> void) => {
     try {
         const db = await openDatabase(); //open the database
 
@@ -43,7 +43,7 @@ export const addItem = async (storeId: number, itemName: string, completed: numb
 };
 
 // Edit item in the database
-export const editItem = async (itemId: number, itemName: string) => {
+export const editItem = async (itemId: number, itemName: string, callback?: () => void) => {
     try {
         const db = await openDatabase();
 
@@ -57,13 +57,15 @@ export const editItem = async (itemId: number, itemName: string) => {
         } else {
             console.log(`No item found with ID ${itemId} to update`)
         }
+
+        if (callback) callback();
     } catch (error){
         console.error('Error editing item:', error);
     }
 };
 
 // Delete the item in the database 
-export const deleteItem = async (itemId: number) => {
+export const deleteItem = async (itemId: number, callback?: ()=> void) => {
     try {
         const db = await openDatabase();
 
@@ -77,13 +79,15 @@ export const deleteItem = async (itemId: number) => {
         } else {
             console.log(`No item found with ${itemId} to delete.`)
         }
+
+        if (callback) callback();
     } catch (error){
         console.error('Error deleting the item', error);
     }
 };
 
 //Delete all the items in the database
-export const deleteAllItems = async () => {
+export const deleteAllItems = async (callback?: ()=> void) => {
     try {
         const db = await openDatabase();
 
@@ -96,6 +100,8 @@ export const deleteAllItems = async () => {
         } else {
             console.log('Error deleting all the items')
         }
+
+        if(callback) callback();
 
     } catch (error){
         console.error('Error deleting all the items', error);
