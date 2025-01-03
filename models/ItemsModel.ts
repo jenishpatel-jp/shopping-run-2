@@ -158,31 +158,28 @@ export const getStoresWithItems = async() => {
         const rows = await db.getAllAsync(query);
 
         // Transform the result into the desired output format
-        const result: Record<string, string[]> = {};
+        const result: Record<string, [string, number][]> = {};
 
         rows.forEach((row: any) => {
             const storeName = row.storeName;
             const itemName = row.itemName;
-            const completed = row.completed;
+            const completed = row.completed || 0;
 
             if (!result[storeName]){
                 result[storeName] = [];
             }
 
-            if (itemName) {
-                result[storeName].push(itemName);
+            if (!itemName === null){ 
+                result[storeName].push([itemName, completed]);
             }
 
-            if (completed){
-                result[storeName].push(completed);
-            }
         });
 
         return result;
 
         
     } catch(error){
-        console.error('Error getting items for Stores with Incomplete items');
+        console.error('Error getting items for each store:', error);
         return {};
     }
 }

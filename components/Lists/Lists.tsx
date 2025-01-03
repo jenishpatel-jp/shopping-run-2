@@ -29,7 +29,7 @@ interface Section {
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useState to determine which item has been selected
-  const [incompleteItems, setIncompleteItems] = useState<Record<string, string[]>>({});
+  const [storeAndItems, setStoreAndItems] = useState<Record<string, [string, number][]>>({});
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   //Need to create a useState that stores the objects {store: [item, item, item]}
@@ -37,8 +37,8 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   useEffect(() => {
     const fetchIncompleteItems = async () => {
       try {
-        const allIncompleteItems = await getStoresWithItems();
-        setIncompleteItems(allIncompleteItems);
+        const allStoreAndItems = await getStoresWithItems();
+        setStoreAndItems(allStoreAndItems);
       } catch (error) {
         console.error("Error fetching incomplete items:", error);
       }
@@ -58,9 +58,9 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //     sections.push({ title: 'Completed', data: completedItem });
   // }
 
-  const sections: Section[] = Object.keys(incompleteItems).map((store) => ({
+  const sections: Section[] = Object.keys(storeAndItems).map((store) => ({
     title: store,
-    data: incompleteItems[store],
+    data: storeAndItems[store].map((item) => item[0]),
   }));
 
   return (
