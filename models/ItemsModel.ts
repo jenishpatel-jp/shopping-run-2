@@ -137,7 +137,7 @@ type StoreWithItems = {
     items: string[];
 }
 
-export const getStoresWithItems = async() => {
+export const getStoresWithIncompleteItems = async() => {
 
     try {
         const db = await openDatabase();
@@ -146,31 +146,31 @@ export const getStoresWithItems = async() => {
             SELECT 
                 stores.storeName,
                 items.itemName,
-                items.completed
             FROM 
                 stores
             LEFT JOIN
                 items
             ON
                 stores.storeId = items.storeId
+            WHERE 
+                items.completed = 0
         `;
 
         const rows = await db.getAllAsync(query);
 
         // Transform the result into the desired output format
-        const result: Record<string, [string, number][]> = {};
+        const result: Record<string, string[]> = {};
 
         rows.forEach((row: any) => {
             const storeName = row.storeName;
             const itemName = row.itemName;
-            const completed = row.completed || 0;
 
             if (!result[storeName]){
                 result[storeName] = [];
             }
 
             if (!itemName === null){ 
-                result[storeName].push([itemName, completed]);
+                result[storeName].push(itemName);
             }
 
         });

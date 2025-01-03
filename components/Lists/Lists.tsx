@@ -4,7 +4,7 @@ import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getStoresWithItems } from "@/models/ItemsModel";
+import { getStoresWithIncompleteItems } from "@/models/ItemsModel";
 
 /*
 Shopping list component
@@ -29,7 +29,7 @@ interface Section {
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useState to determine which item has been selected
-  const [storeAndItems, setStoreAndItems] = useState<Record<string, [string, number][]>>({});
+  const [storeAndItems, setStoreAndItems] = useState<Record<string, string[]>>({});
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   //Need to create a useState that stores the objects {store: [item, item, item]}
@@ -37,8 +37,8 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   useEffect(() => {
     const fetchIncompleteItems = async () => {
       try {
-        const allStoreAndItems = await getStoresWithItems();
-        setStoreAndItems(allStoreAndItems);
+        const incompleteItems = await getStoresWithIncompleteItems();
+        setStoreAndItems(incompleteItems);
       } catch (error) {
         console.error("Error fetching incomplete items:", error);
       }
@@ -47,21 +47,31 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     fetchIncompleteItems();
   }, []);
 
-  // Created a sections constant where the keys are mapped to an object, title and data. title has the object.key (stores) and the data has values of the shopping list.
-  // const sections: Section[] = Object.keys(shoppingList).map((store) => ({
-  //     title: store,
-  //     data: shoppingList[store]
-  // }));
 
-  // // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
+  
+  const arrayOfCompletedItems = [];
+
+  for (const [store, item] of Object.entries(storeAndItems)){
+    for (const status of item){
+      arrayOfCompletedItems.push(status[1]);
+  }
+  }
+
+
+
+
+  // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
   // if (completedItem.length > 0) {
   //     sections.push({ title: 'Completed', data: completedItem });
   // }
+
 
   const sections: Section[] = Object.keys(storeAndItems).map((store) => ({
     title: store,
     data: storeAndItems[store].map((item) => item[0]),
   }));
+
+
 
   return (
     <SectionList
@@ -71,6 +81,9 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
       )}
       renderItem={({ item, section }) => (
         // Still need to code how a completed item would look like
+
+
+
 
         <View style={styles.itemsContainer}>
           <View style={styles.checkboxContainer}>
