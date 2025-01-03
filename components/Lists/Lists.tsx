@@ -61,16 +61,16 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   fetchCompletedItems();
 }, []);
 
-  // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
-  // if (completedItem.length > 0) {
-  //     sections.push({ title: 'Completed', data: completedItem });
-  // }
-
 
   const sections: Section[] = Object.keys(storeAndItems).map((store) => ({
     title: store,
     data: storeAndItems[store].map((item) => item[0]),
   }));
+
+  // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
+  if (completedItems.length > 0) {
+    sections.push({ title: 'Completed', data: completedItems });
+  }
 
 
 
