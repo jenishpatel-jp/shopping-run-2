@@ -174,7 +174,6 @@ export const getStoresWithIncompleteItems = async() => {
             }
 
         });
-
         return result;
 
         
@@ -183,3 +182,34 @@ export const getStoresWithIncompleteItems = async() => {
         return {};
     }
 }
+
+// Fetch the completed items for a store
+export const getCompletedItemsFromStores = async () => {
+    try {
+        const db = await openDatabase();
+
+        const query = `
+            SELECT 
+                items.itemName,
+            FROM 
+                items
+            WHERE 
+                items.completed = 1
+        `;
+
+        const rows = await db.getAllAsync(query);
+
+        // Transform the result into the desired output format
+        const result: string[] = [];
+
+        rows.forEach((row: any) => {
+            const itemName = row.itemName;
+            result.push(itemName);
+        });
+
+        return result;
+    } catch (error){
+        console.error('Error getting completed items for store:', error);
+        return [];
+    }
+};
