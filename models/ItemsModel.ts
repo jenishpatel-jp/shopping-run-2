@@ -137,32 +137,33 @@ type StoreWithItems = {
     items: string[];
 }
 
-export const getStoresWithIncompleteItems = async() => {
+export const getStoresWithItems = async() => {
+
     try {
         const db = await openDatabase();
 
         const query = `
             SELECT 
                 stores.storeName,
-                items.itemName
+                items.itemName,
+                items.completed
             FROM 
                 stores
             LEFT JOIN
                 items
             ON
                 stores.storeId = items.storeId
-            WHERE 
-                items.completed = 0
         `;
 
         const rows = await db.getAllAsync(query);
 
-        // Transfor the result into the desired output format
+        // Transform the result into the desired output format
         const result: Record<string, string[]> = {};
 
         rows.forEach((row: any) => {
             const storeName = row.storeName;
             const itemName = row.itemName;
+            const completed = row.completed;
 
             if (!result[storeName]){
                 result[storeName] = [];
@@ -170,6 +171,10 @@ export const getStoresWithIncompleteItems = async() => {
 
             if (itemName) {
                 result[storeName].push(itemName);
+            }
+
+            if (completed){
+                result[storeName].push(completed);
             }
         });
 

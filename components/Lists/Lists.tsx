@@ -4,7 +4,7 @@ import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getStoresWithIncompleteItems } from "@/models/ItemsModel";
+import { getStoresWithItems } from "@/models/ItemsModel";
 
 /*
 Shopping list component
@@ -29,9 +29,7 @@ interface Section {
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useState to determine which item has been selected
-  const [incompleteItems, setIncompleteItems] = useState<
-    Record<string, string[]>
-  >({});
+  const [incompleteItems, setIncompleteItems] = useState<Record<string, string[]>>({});
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   //Need to create a useState that stores the objects {store: [item, item, item]}
@@ -39,7 +37,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   useEffect(() => {
     const fetchIncompleteItems = async () => {
       try {
-        const allIncompleteItems = await getStoresWithIncompleteItems();
+        const allIncompleteItems = await getStoresWithItems();
         setIncompleteItems(allIncompleteItems);
       } catch (error) {
         console.error("Error fetching incomplete items:", error);
@@ -113,7 +111,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     //                             style={styles.editTextInput}
     //                             value={newItemName}
     //                             onChangeText={setNewItemName}
-    //                         />
+    //                         />4
     //                     ) : (
     //                         <View style={styles.checkboxContainer}>
     //                             <Checkbox
