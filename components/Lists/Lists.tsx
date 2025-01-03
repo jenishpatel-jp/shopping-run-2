@@ -4,7 +4,7 @@ import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getStoresWithIncompleteItems } from "@/models/ItemsModel";
+import { getStoresWithIncompleteItems, getCompletedItemsFromStores } from "@/models/ItemsModel";
 
 /*
 Shopping list component
@@ -31,6 +31,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useState to determine which item has been selected
   const [storeAndItems, setStoreAndItems] = useState<Record<string, string[]>>({});
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [completedItems, setCompletedItems] = useState<string[]>([]);
 
   //Need to create a useState that stores the objects {store: [item, item, item]}
 
@@ -47,18 +48,18 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     fetchIncompleteItems();
   }, []);
 
+  useEffect(() => {
+    const fetchCompletedItems = async () => {
+      try {
+        const completedItems = await getCompletedItemsFromStores();
+        setCompletedItems(completedItems); 
+      } catch (error) {
+        console.error("Error fetching completed items:", error);
+      }
 
-  
-  const arrayOfCompletedItems = [];
-
-  for (const [store, item] of Object.entries(storeAndItems)){
-    for (const status of item){
-      arrayOfCompletedItems.push(status[1]);
-  }
-  }
-
-
-
+  };
+  fetchCompletedItems();
+}, []);
 
   // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
   // if (completedItem.length > 0) {
