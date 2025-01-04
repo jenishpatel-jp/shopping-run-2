@@ -4,7 +4,7 @@ import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getStoresWithIncompleteItems, getCompletedItemsFromStores } from "@/models/ItemsModel";
+import { getStoresWithIncompleteItems, getCompletedItemsFromStores, editItem } from "@/models/ItemsModel";
 
 /*
 Shopping list component
@@ -28,21 +28,17 @@ interface Section {
 }
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
-  //useState to determine which item has been selected
+  //useStates to store incomeplete items and completed items
   const [storeAndItems, setStoreAndItems] = useState<Record<string, string[]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
 
-  //useState to determine which item has been selected
+  //useStates to store the selected item, store and index of the item
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-
-  //useState to determine which store and item is being edited
   const [storeOfItem, setStoreOfItem] = useState<string | null>(null);
-
-  //useState to determine which item is being edited
   const [indexOfItem, setIndexOfItem] = useState<number | null>(null);
 
-  //Need to create a useState that stores the objects {store: [item, item, item]}
 
+  //useEffect to fetch the incomplete
   useEffect(() => {
     const fetchIncompleteItems = async () => {
       try {
@@ -56,6 +52,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     fetchIncompleteItems();
   }, []);
 
+  //useEffect to fetch the completed items
   useEffect(() => {
     const fetchCompletedItems = async () => {
       try {
@@ -64,12 +61,12 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
       } catch (error) {
         console.error("Error fetching completed items:", error);
       }
-
   };
   fetchCompletedItems();
 }, []);
 
 
+//SectionList component to render the header and list
   const sections: Section[] = Object.keys(storeAndItems).map((store) => ({
     title: store,
     data: storeAndItems[store].map((item) => item[0]),
@@ -90,6 +87,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
             <Text style={styles.storeName}>{section.title}</Text>
         )}
         renderItem={({ item, section }) => (
+
             <View>
                 {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
                 {section.title !== 'Completed' ? (
@@ -112,7 +110,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                                         setSelectedItem(item);
                                         //checkOffItem(item);
                                     }}
-                                />
+                                  />
                                 <Text style={styles.checkboxText}> {item} </Text>
                             </View>
                         )}
