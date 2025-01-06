@@ -94,13 +94,16 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                     <View style={styles.itemsContainer}>
 
                         {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
-                        {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? (
+                        {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? 
+                        (
                             <TextInput
                                 style={styles.editTextInput}
                                 //value={storeAndItems}
                                 onChangeText={()=> console.log('onChangeText')}
                             />
-                        ) : ( 
+                        ) 
+                        : 
+                        ( 
                             <View style={styles.checkboxContainer}>
                                 <Checkbox
                                     style={styles.checkbox}
@@ -116,21 +119,31 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                         )}
                         {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
                         <View style={styles.updateView}>
-                            {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? (
+                            
+                            {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? 
+                            (
                                 <Pressable onPress={()=> console.log('update')}>
                                     <Text style={styles.buttonText}>Update</Text>
                                 </Pressable>
-                            ) : (
+                            ) 
+                            : 
+                            (
                                 <Pressable onPress={() => console.log('edit')}>
                                     <Feather style={styles.edit} name="edit" size={26} color="#F5A418" />
                                 </Pressable>
                             )}
+                            
                             <Pressable onPress={() => console.log('delete')}>
                                 <MaterialIcons style={styles.delete} name="delete-outline" size={30} color="#F5A418" />
+                            
                             </Pressable>
+
                         </View>
                     </View>
-                ) : (
+                ) 
+                // If the title is completed, it will render the completed items
+                : 
+                (
                     <Text style={styles.completedItems}>{item}</Text>
                 )}
             </View>
