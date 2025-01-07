@@ -29,7 +29,7 @@ interface Section {
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useStates to store incomeplete items and completed items
-  const [storeAndItems, setStoreAndItems] = useState<Record<string, string[]>>({});
+  const [storeAndItems, setStoreAndItems] = useState<Record<string, [string, number][]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
 
   //useStates to store the selected item, store and index of the item
@@ -94,7 +94,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                     <View style={styles.itemsContainer}>
 
                         {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
-                        {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? 
+                        {storeOfItem === section.title  ? 
                         (
                             <TextInput
                                 style={styles.editTextInput}
@@ -120,7 +120,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                         {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
                         <View style={styles.updateView}>
                             
-                            {storeOfItem === section.title && indexOfItem === storeAndItems[section.title].indexOf(item) ? 
+                            {storeOfItem === section.title? 
                             (
                                 <Pressable onPress={()=> console.log('update')}>
                                     <Text style={styles.buttonText}>Update</Text>
