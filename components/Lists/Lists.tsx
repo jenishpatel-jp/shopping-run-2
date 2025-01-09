@@ -32,10 +32,11 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   const [incomepleteItems, setIncompleteItems] = useState<Record<string, [number, string][]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
 
-  //useStates to store the selected item, store and index of the item
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [storeOfItem, setStoreOfItem] = useState<string | null>(null);
+  //useStates to store the selected item and the index of the item
+  const [itemSelected, setItemSelected] = useState<string>("");
   const [indexOfItem, setIndexOfItem] = useState<number | null>(null);
+
+
 
 
   //useEffect to fetch the incomplete
@@ -83,18 +84,18 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     // Uses the SectionList component to render the header and list
     <SectionList
         sections={sections}
-        renderSectionHeader={({ section }) => (
-            <Text style={styles.storeName}>{section.title}</Text>
+        renderSectionHeader={({ section: {title} }) => (
+            <Text style={styles.storeName}>{title}</Text>
         )}
-        renderItem={({ item, section }) => (
+        renderItem={({ item, section: {title}, index }) => (
 
             <View>
                 {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
-                {section.title !== 'Completed' ? (
+                {title !== 'Completed' ? (
                     <View style={styles.itemsContainer}>
 
                         {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
-                        {storeOfItem === section.title  ? 
+                        {itemSelected === item  ? 
                         (
                             <TextInput
                                 style={styles.editTextInput}
@@ -107,10 +108,10 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                             <View style={styles.checkboxContainer}>
                                 <Checkbox
                                     style={styles.checkbox}
-                                    color={selectedItem === item ? "#F5A418" : "#F5A418"}
-                                    value={selectedItem === item}
+                                    color={itemSelected === item ? "#F5A418" : "#F5A418"}
+                                    value={itemSelected === item}
                                     onValueChange={() => {
-                                        setSelectedItem(item);
+                                        setItemSelected(item);
                                         //checkOffItem(item);
                                     }}
                                   />
@@ -120,7 +121,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                         {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
                         <View style={styles.updateView}>
                             
-                            {storeOfItem === section.title? 
+                            {itemSelected === item? 
                             (
                                 <Pressable onPress={()=> console.log('update')}>
                                     <Text style={styles.buttonText}>Update</Text>
