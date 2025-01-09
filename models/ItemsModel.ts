@@ -159,7 +159,7 @@ export const getStoresWithIncompleteItems = async() => {
         const rows = await db.getAllAsync(query);
 
         // Transform the result into the desired output format
-        const result: Record<string, [string, number] []> = {};
+        const result: Record<string, [number, string] []> = {};
 
         rows.forEach((row: any) => {
             const storeName = row.storeName;
@@ -171,7 +171,7 @@ export const getStoresWithIncompleteItems = async() => {
             }
 
             if (!itemName === null){ 
-                result[storeName].push([itemName, itemId]);
+                result[storeName].push([itemId, itemName]);
             }
 
         });

@@ -29,7 +29,7 @@ interface Section {
 
 const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useStates to store incomeplete items and completed items
-  const [storeAndItems, setStoreAndItems] = useState<Record<string, [string, number][]>>({});
+  const [incomepleteItems, setIncompleteItems] = useState<Record<string, [number, string][]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
 
   //useStates to store the selected item, store and index of the item
@@ -43,7 +43,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
     const fetchIncompleteItems = async () => {
       try {
         const incompleteItems = await getStoresWithIncompleteItems();
-        setStoreAndItems(incompleteItems);
+        setIncompleteItems(incompleteItems);
       } catch (error) {
         console.error("Error fetching incomplete items:", error);
       }
@@ -67,9 +67,9 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
 
 
 //SectionList component to render the header and list
-  const sections: Section[] = Object.keys(storeAndItems).map((store) => ({
+  const sections: Section[] = Object.keys(incomepleteItems).map((store) => ({
     title: store,
-    data: storeAndItems[store].map((item) => item[0]),
+    data: incomepleteItems[store].map((item) => item[1]),
   }));
 
   // if completedItem has a item in it, a title called 'Completed' is added. The data is the list of completed items.
