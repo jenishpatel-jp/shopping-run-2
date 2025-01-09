@@ -35,6 +35,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   //useStates to store the selected item and the index of the item
   const [itemSelected, setItemSelected] = useState<string>("");
   const [indexOfItem, setIndexOfItem] = useState<number | null>(null);
+  const [newItemName, setNewItemName] = useState<string>("");
 
 
 
@@ -95,12 +96,12 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                     <View style={styles.itemsContainer}>
 
                         {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
-                        {itemSelected === item  ? 
+                        {itemSelected === item && indexOfItem === index ? 
                         (
                             <TextInput
                                 style={styles.editTextInput}
-                                //value={storeAndItems}
-                                onChangeText={()=> console.log('onChangeText')}
+                                value={newItemName}
+                                onChangeText={(text)=> setNewItemName(text)}
                             />
                         ) 
                         : 
@@ -112,7 +113,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                                     value={itemSelected === item}
                                     onValueChange={() => {
                                         setItemSelected(item);
-                                        //checkOffItem(item);
+                                      
                                     }}
                                   />
                                 <Text style={styles.checkboxText}> {item} </Text>
@@ -121,7 +122,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                         {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
                         <View style={styles.updateView}>
                             
-                            {itemSelected === item? 
+                            {itemSelected === item && indexOfItem === index ? 
                             (
                                 <Pressable onPress={()=> console.log('update')}>
                                     <Text style={styles.buttonText}>Update</Text>
