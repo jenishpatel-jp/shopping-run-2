@@ -19,6 +19,7 @@ interface ListsProps {
     itemName: string;
     completed: number;
   }[];
+  setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // interface for the section that is created which has a key object of title and data.
@@ -27,7 +28,7 @@ interface Section {
   data: string[];
 }
 
-const Lists: React.FC<ListsProps> = ({ stores, items }) => {
+const Lists: React.FC<ListsProps> = ({ stores, items, setItemFetchTrigger }) => {
   //useStates to store incomeplete items and completed items
   const [incomepleteItems, setIncompleteItems] = useState<Record<string, [number, string][]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
@@ -66,6 +67,13 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
   };
   fetchCompletedItems();
 }, []);
+
+const handleEditItem = async (itemId: number, itemName: string) => {
+  await editItem(itemId, itemName, () => setItemFetchTrigger((prev) => !prev)); 
+  setNewItemName("");
+  setItemSelected("");
+  setIndexOfItem(null);
+};
 
 
 //SectionList component to render the header and list
@@ -111,10 +119,7 @@ const Lists: React.FC<ListsProps> = ({ stores, items }) => {
                                     style={styles.checkbox}
                                     color={itemSelected === item ? "#F5A418" : "#F5A418"}
                                     value={itemSelected === item}
-                                    onValueChange={() => {
-                                        setItemSelected(item);
-                                      
-                                    }}
+                                    onValueChange={() => ()=> console.log('checkbox')}
                                   />
                                 <Text style={styles.checkboxText}> {item} </Text>
                             </View>
