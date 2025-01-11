@@ -4,7 +4,7 @@ import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getStoresWithIncompleteItems, getCompletedItemsFromStores, editItem } from "@/models/ItemsModel";
+import { getStoresWithIncompleteItems, getCompletedItemsFromStores, editItem, deleteItem } from "@/models/ItemsModel";
 
 /*
 Shopping list component
@@ -78,6 +78,10 @@ const handleEditItem = (itemName: string, index: number) => {
   setNewItemName(itemName);
 }
 
+const handleDeleteItem = async (itemId: number) => {
+  await deleteItem(itemId, () => setItemFetchTrigger((prev) => !prev));
+}
+
 
 //SectionList component to render the header and list
   const sections: Section[] = Object.keys(incomepleteItems).map((store) => ({
@@ -143,7 +147,7 @@ const handleEditItem = (itemName: string, index: number) => {
                                 </Pressable>
                             )}
                             
-                            <Pressable onPress={() => console.log('delete')}>
+                            <Pressable onPress={() => handleDeleteItem(incomepleteItems[title][index][0])}>
                                 <MaterialIcons style={styles.delete} name="delete-outline" size={30} color="#F5A418" />
                             
                             </Pressable>
