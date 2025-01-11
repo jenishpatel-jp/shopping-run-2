@@ -65,12 +65,18 @@ const Lists: React.FC<ListsProps> = ({ stores, items, setItemFetchTrigger }) => 
   fetchCompletedItems();
 }, []);
 
-const handleEditItem = async (itemId: number, itemName: string) => {
+const handleUpdateItem = async (itemId: number, itemName: string) => {
   await editItem(itemId, itemName, () => setItemFetchTrigger((prev) => !prev)); 
   setNewItemName("");
   setItemSelected("");
   setIndexOfItem(null);
 };
+
+const handleEditItem = (itemName: string, index: number) => {
+  setItemSelected(itemName);
+  setIndexOfItem(index);
+  setNewItemName(itemName);
+}
 
 
 //SectionList component to render the header and list
@@ -126,13 +132,13 @@ const handleEditItem = async (itemId: number, itemName: string) => {
                             
                             {itemSelected === item && indexOfItem === index ? 
                             (
-                                <Pressable onPress={()=> handleEditItem(incomepleteItems[title][index][0], newItemName)}>
+                                <Pressable onPress={()=> handleUpdateItem(incomepleteItems[title][index][0], newItemName)}>
                                     <Text style={styles.buttonText}>Update</Text>
                                 </Pressable>
                             ) 
                             : 
                             (
-                                <Pressable onPress={() => console.log('edit')}>
+                                <Pressable onPress={() => handleEditItem(item, index)}>
                                     <Feather style={styles.edit} name="edit" size={26} color="#F5A418" />
                                 </Pressable>
                             )}
