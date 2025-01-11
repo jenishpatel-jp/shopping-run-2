@@ -38,9 +38,6 @@ const Lists: React.FC<ListsProps> = ({ stores, items, setItemFetchTrigger }) => 
   const [indexOfItem, setIndexOfItem] = useState<number | null>(null);
   const [newItemName, setNewItemName] = useState<string>("");
 
-
-
-
   //useEffect to fetch the incomplete
   useEffect(() => {
     const fetchIncompleteItems = async () => {
