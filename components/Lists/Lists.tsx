@@ -129,7 +129,7 @@ const handleEditItem = async (itemId: number, itemName: string) => {
                             
                             {itemSelected === item && indexOfItem === index ? 
                             (
-                                <Pressable onPress={()=> console.log('update')}>
+                                <Pressable onPress={()=> handleEditItem(incomepleteItems[title][index][0], newItemName)}>
                                     <Text style={styles.buttonText}>Update</Text>
                                 </Pressable>
                             ) 
