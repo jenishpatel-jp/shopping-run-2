@@ -12,7 +12,6 @@ import { setUpItemsTable, getItems } from "@/models/ItemsModel";
 
 export default function ShoppingRun() {
   const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
-  const [items, setItems] = useState<{ itemId: number; storeId: number; itemName: string; completed: number }[]>([]);
   const [storeFetchTrigger, setStoreFetchTrigger] = useState(false);
   const [itemFetchTrigger, setItemFetchTrigger] = useState(false);
 
@@ -24,7 +23,7 @@ export default function ShoppingRun() {
   const data: ListItem[] = [
     { key: "store", component: <Store setStoreFetchTrigger={setStoreFetchTrigger}/> },
     { key: "items", component: <Items stores={stores} setStoreFetchTrigger={setStoreFetchTrigger} setItemFetchTrigger={setItemFetchTrigger} /> },
-    { key: "lists", component: <Lists setItemFetchTrigger={setItemFetchTrigger} /> },
+    { key: "lists", component: <Lists itemFetchTrigger={itemFetchTrigger} setItemFetchTrigger={setItemFetchTrigger} /> },
     {
       key: "reset",
       component: <ResetButton reset={() => console.log("Reset the button")} />,
@@ -55,17 +54,6 @@ export default function ShoppingRun() {
     fetchStores();
   }, [storeFetchTrigger]);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const allItems = await getItems();
-        setItems(allItems);
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-    fetchItems();
-  }, [itemFetchTrigger]);
 
   return (
     <SafeAreaProvider>

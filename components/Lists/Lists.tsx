@@ -12,6 +12,7 @@ lists out each store and what items are allocated to that store
 */
 
 interface ListsProps {
+  itemFetchTrigger: boolean;
   setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -21,7 +22,7 @@ interface Section {
   data: string[];
 }
 
-const Lists: React.FC<ListsProps> = ({ setItemFetchTrigger }) => {
+const Lists: React.FC<ListsProps> = ({ itemFetchTrigger, setItemFetchTrigger }) => {
   //useStates to store incomeplete items and completed items
   const [incomepleteItems, setIncompleteItems] = useState<Record<string, [number, string][]>>({});
   const [completedItems, setCompletedItems] = useState<string[]>([]);
