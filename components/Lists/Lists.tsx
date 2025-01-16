@@ -44,7 +44,7 @@ const Lists: React.FC<ListsProps> = ({ itemFetchTrigger, setItemFetchTrigger }) 
     };
 
     fetchIncompleteItems();
-  }, []);
+  }, [itemFetchTrigger]);
 
   //useEffect to fetch the completed items
   useEffect(() => {
@@ -57,7 +57,7 @@ const Lists: React.FC<ListsProps> = ({ itemFetchTrigger, setItemFetchTrigger }) 
       }
   };
   fetchCompletedItems();
-}, []);
+}, [itemFetchTrigger]);
 
 const handleUpdateItem = async (itemId: number, itemName: string) => {
   await editItem(itemId, itemName, () => setItemFetchTrigger((prev) => !prev)); 
