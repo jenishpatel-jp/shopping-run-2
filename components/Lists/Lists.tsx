@@ -110,7 +110,7 @@ const handleDeleteItem = async (itemId: number) => {
                             <TextInput
                                 style={styles.editTextInput}
                                 value={newItemName}
-                                onChangeText={(text)=> setNewItemName(text)}
+                                onChangeText={setNewItemName}
                             />
                         ) 
                         : 

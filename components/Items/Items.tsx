@@ -39,7 +39,11 @@ const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetc
   };
 
   //Function to edit a store
-  const handleEditStore = async (storeId: number, storeName: string) => {
+  const handleUpdateStore = async (storeId: number, storeName: string) => {
+    if (!storeName) {
+      console.warn("Store name is empty");
+      return;
+    }
     await editStore(storeId, storeName, () => setStoreFetchTrigger((prev) => !prev));
     setNewStoreName("");
     setEditingStoreIndex(null);
@@ -75,7 +79,6 @@ const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetc
           {editingStoreIndex === index ? (
             <TextInput
               style={styles.editTextInput}
-              placeholder={store.storeName}
               value={newStoreName}
               onChangeText={setNewStoreName}
               placeholderTextColor={"#F5A418"}
@@ -98,7 +101,7 @@ const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetc
             {editingStoreIndex === index ? (
               // editStore function
               <Pressable
-                onPress={() => handleEditStore(store.storeId, newStoreName)}
+                onPress={() => handleUpdateStore(store.storeId, newStoreName)}
               >
                 <Text style={styles.buttonText}>Update</Text>
               </Pressable>

@@ -19,6 +19,10 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
 
   //function to handle how stores are added to the database. 
   const handleAddStore = async () => {
+    if (!storeName) {
+      console.warn("Store name is empty");
+      return;
+    }
     await addStore(storeName, () => setStoreFetchTrigger((prev) => !prev));
     setStoreName("");
   }
