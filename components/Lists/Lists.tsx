@@ -113,6 +113,8 @@ const handleDeleteItem = async (itemId: number) => {
                                 onChangeText={setNewItemName}
                                 placeholder={item}
                                 placeholderTextColor={"#F5A418"}
+                                onFocus={()=> console.log('focus')}
+                                onBlur={()=> console.log('blur')}
                             />
                         ) 
                         : 
@@ -158,7 +160,7 @@ const handleDeleteItem = async (itemId: number) => {
                 )}
             </View>
         )}
-        keyExtractor={(item, index) => item + index}
+        keyExtractor={(item, index) => `${item}-${index}`}
     />
   );
 };

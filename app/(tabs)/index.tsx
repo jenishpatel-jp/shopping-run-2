@@ -59,7 +59,7 @@ export default function ShoppingRun() {
     const fetchItems = async () => {
       try {
         const allItems = await getItems();
-        console.log("All items:", allItems);
+        //console.log("All items:", allItems);
       } catch (error) {
         console.error("Error fetching items:", error);
       }
