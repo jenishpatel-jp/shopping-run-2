@@ -137,7 +137,8 @@ export const getStoresWithIncompleteItems = async() => {
         const query = `
             SELECT 
                 stores.storeName,
-                items.itemName
+                items.itemName,
+                items.itemId
             FROM 
                 stores
             LEFT JOIN
