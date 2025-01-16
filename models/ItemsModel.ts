@@ -33,7 +33,7 @@ export const addItem = async (storeId: number, itemName: string, completed: numb
             [storeId, itemName, completed]
         );
 
-        console.log(`Item added successfully with ID: ${result.lastInsertRowId, result.changes}`);
+        console.log(`New item added with item name: ${itemName} and item ID: ${result.lastInsertRowId}`);
 
         if (callback)callback(); 
 
@@ -53,7 +53,7 @@ export const editItem = async (itemId: number, itemName: string, callback?: () =
         );
 
         if (result.changes > 0){
-            console.log(`Item with ID ${itemId} was successfully updated`)
+            console.log(`Item with ID ${itemId} was successfully updated to ${itemName}`)
         } else {
             console.log(`No item found with ID ${itemId} to update`)
         }
@@ -127,14 +127,6 @@ export const getItems = async ()=> {
         console.error('Error getting the item', error);
         return [];
     }
-}
-
-
-// Get the incomplete items for each Store
-
-type StoreWithItems = {
-    storeName: string;
-    items: string[];
 }
 
 export const getStoresWithIncompleteItems = async() => {
