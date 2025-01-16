@@ -164,7 +164,7 @@ export const getStoresWithIncompleteItems = async() => {
                 result[storeName] = [];
             }
 
-            if (!itemName === null){ 
+            if (itemName !== null){ 
                 result[storeName].push([itemId, itemName]);
             }
 
@@ -177,7 +177,7 @@ export const getStoresWithIncompleteItems = async() => {
         console.error('Error getting items for each store:', error);
         return {};
     }
-}
+};
 
 // Fetch the completed items for a store
 export const getCompletedItemsFromStores = async () => {
