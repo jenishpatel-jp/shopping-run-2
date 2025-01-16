@@ -122,6 +122,7 @@ export const getItems = async ()=> {
     try {
         const db = await openDatabase();
         const allRows: ItemRow[] = await db.getAllAsync('SELECT * FROM items');
+        console.log('All items:', allRows);
         return allRows;
     } catch (error){
         console.error('Error getting the item', error);
@@ -168,6 +169,7 @@ export const getStoresWithIncompleteItems = async() => {
             }
 
         });
+        console.log('Stores with incomplete items:', result);
         return result;
 
         
@@ -200,7 +202,7 @@ export const getCompletedItemsFromStores = async () => {
             const itemName = row.itemName;
             result.push(itemName);
         });
-
+        console.log('Completed items:', result);
         return result;
     } catch (error){
         console.error('Error getting completed items for store:', error);

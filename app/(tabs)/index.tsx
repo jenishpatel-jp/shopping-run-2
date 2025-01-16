@@ -54,6 +54,19 @@ export default function ShoppingRun() {
     fetchStores();
   }, [storeFetchTrigger]);
 
+  //Added to test the getItems function and see if items were in the database
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const allItems = await getItems();
+        console.log("All items:", allItems);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+    fetchItems();
+  }, []);
+
 
   return (
     <SafeAreaProvider>
