@@ -111,6 +111,8 @@ const handleDeleteItem = async (itemId: number) => {
                                 style={styles.editTextInput}
                                 value={newItemName}
                                 onChangeText={setNewItemName}
+                                placeholder={item}
+                                placeholderTextColor={"#F5A418"}
                             />
                         ) 
                         : 

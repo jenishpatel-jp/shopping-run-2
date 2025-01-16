@@ -82,6 +82,7 @@ const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetc
               value={newStoreName}
               onChangeText={setNewStoreName}
               placeholderTextColor={"#F5A418"}
+              placeholder={store.storeName}
             />
           ) : (
             <View style={styles.checkboxContainer}>
