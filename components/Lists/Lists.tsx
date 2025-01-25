@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, SectionList, Pressable, TextInput } from "react-native";
 import { styles } from "./ListStyles";
 import Checkbox from "expo-checkbox";
@@ -32,6 +32,8 @@ const Lists: React.FC<ListsProps> = ({ itemFetchTrigger, setItemFetchTrigger }) 
   const [indexOfItem, setIndexOfItem] = useState<number | null>(null);
   const [newItemName, setNewItemName] = useState<string>("");
 
+
+
   //useEffect to fetch the incomplete
   useEffect(() => {
     const fetchIncompleteItems = async () => {
@@ -64,16 +66,21 @@ const handleUpdateItem = async (itemId: number, itemName: string) => {
   setNewItemName("");
   setItemSelected("");
   setIndexOfItem(null);
+  console.log('handleUpdateItem called');
 };
 
 const handleEditItem = (itemName: string, index: number) => {
   setItemSelected(itemName);
   setIndexOfItem(index);
   setNewItemName(itemName);
+  console.log('handleEditItem called'); 
+  
+
 }
 
 const handleDeleteItem = async (itemId: number) => {
   await deleteItem(itemId, () => setItemFetchTrigger((prev) => !prev));
+  console.log('handleDeleteItem called');
 }
 
 
@@ -95,7 +102,9 @@ const handleDeleteItem = async (itemId: number) => {
     <SectionList
         sections={sections}
         renderSectionHeader={({ section: {title} }) => (
-            <Text style={styles.storeName}>{title}</Text>
+            
+            <Text style={styles.storeName}>{title}</Text>  
+            
         )}
         renderItem={({ item, section: {title}, index }) => (
 
@@ -103,18 +112,13 @@ const handleDeleteItem = async (itemId: number) => {
                 {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
                 {title !== 'Completed' ? (
                     <View style={styles.itemsContainer}>
-
                         {/* Checks if the store name and item is the selected item. This view shows shows the text input or checkbox */}
                         {itemSelected === item && indexOfItem === index ? 
                         (
                             <TextInput
                                 style={styles.editTextInput}
-                                value={newItemName}
-                                onChangeText={setNewItemName}
-                                placeholder={item}
                                 placeholderTextColor={"#F5A418"}
-                                onFocus={()=> console.log('focus')}
-                                onBlur={()=> console.log('blur')}
+                                
                             />
                         ) 
                         : 
@@ -127,6 +131,7 @@ const handleDeleteItem = async (itemId: number) => {
                                     onValueChange={() => ()=> console.log('checkbox')}
                                   />
                                 <Text style={styles.checkboxText}> {item} </Text>
+                                
                             </View>
                         )}
                         {/* The view will show Update if the item has been ticked, otherwise it will show the edit icon */}
@@ -147,7 +152,6 @@ const handleDeleteItem = async (itemId: number) => {
                             
                             <Pressable onPress={() => handleDeleteItem(incomepleteItems[title][index][0])}>
                                 <MaterialIcons style={styles.delete} name="delete-outline" size={30} color="#F5A418" />
-                            
                             </Pressable>
 
                         </View>
@@ -160,7 +164,7 @@ const handleDeleteItem = async (itemId: number) => {
                 )}
             </View>
         )}
-        keyExtractor={(item, index) => `${item}-${index}`}
+        keyExtractor={(item, index) => item + index}
     />
   );
 };
