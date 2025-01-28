@@ -75,6 +75,7 @@ useEffect(() => {
   console.log('newItemName:', newItemName);
 }, [newItemName]);  
 
+// Function to handle the update of an item
 const handleUpdateItem = async (itemId: number, itemName: string) => {
   await editItem(itemId, itemName, () => setItemFetchTrigger((prev) => !prev)); 
   setNewItemName("");
@@ -83,6 +84,7 @@ const handleUpdateItem = async (itemId: number, itemName: string) => {
   console.log('handleUpdateItem called');
 };
 
+// Function to handle the edit of an item
 const handleEditItem = (itemName: string, index: number) => {
   setItemSelected(itemName);
   setIndexOfItem(index);
@@ -91,6 +93,7 @@ const handleEditItem = (itemName: string, index: number) => {
   
 }
 
+// Function to handle the delete of an item
 const handleDeleteItem = async (itemId: number) => {
   await deleteItem(itemId, () => setItemFetchTrigger((prev) => !prev));
   console.log('handleDeleteItem called');
@@ -108,9 +111,11 @@ const handleDeleteItem = async (itemId: number) => {
     sections.push({ title: 'Completed', data: completedItems });
   };
 
-  return (
-    
+  useEffect(() => {
+    console.log('Sections recomputed:', sections);
+  }, [incomepleteItems, completedItems]);
 
+  return (
     // Uses the SectionList component to render the header and list
     <SectionList
         sections={sections}
