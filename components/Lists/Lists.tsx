@@ -61,6 +61,20 @@ const Lists: React.FC<ListsProps> = ({ itemFetchTrigger, setItemFetchTrigger }) 
   fetchCompletedItems();
 }, [itemFetchTrigger]);
 
+// Logs to check when itemSelected, indexOfItem and newItemName changes
+
+useEffect(() => { 
+  console.log('itemSelected:', itemSelected);
+}, [itemSelected]);
+
+useEffect(() => { 
+  console.log('indexOfItem:', indexOfItem);
+}, [indexOfItem]);
+
+useEffect(() => { 
+  console.log('newItemName:', newItemName);
+}, [newItemName]);  
+
 const handleUpdateItem = async (itemId: number, itemName: string) => {
   await editItem(itemId, itemName, () => setItemFetchTrigger((prev) => !prev)); 
   setNewItemName("");
@@ -75,7 +89,6 @@ const handleEditItem = (itemName: string, index: number) => {
   setNewItemName(itemName);
   console.log('handleEditItem called'); 
   
-
 }
 
 const handleDeleteItem = async (itemId: number) => {
