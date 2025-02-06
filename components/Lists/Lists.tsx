@@ -125,7 +125,6 @@ const handleDeleteItem = async (itemId: number) => {
             
         )}
         renderItem={({ item, section: {title}, index }) => (
-
             <View>
                 {/* If the title is not completed, it will render the items, otherwise it will render the completed list */}
                 {title !== 'Completed' ? (
@@ -136,6 +135,8 @@ const handleDeleteItem = async (itemId: number) => {
                             <TextInput
                                 style={styles.editTextInput}
                                 placeholderTextColor={"#F5A418"}
+                                onFocus={() => console.log('Textinput focused')}
+                                onBlur={() => console.log('Textinput blurred')} 
                                 
                             />
                         ) 
