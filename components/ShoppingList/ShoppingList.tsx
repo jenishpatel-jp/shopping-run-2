@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, SectionList, Pressable, TextInput } from "react-native";
-import { styles } from "./ListStyles";
+import { styles } from "./ShoppingListStyles";
 import Checkbox from "expo-checkbox";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
