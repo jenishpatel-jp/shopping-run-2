@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
-import { styles } from "./ItemStyles";
+import { styles } from "./AddItemStyles";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { editStore, deleteStore } from "@/models/StoreModel";
 import { addItem } from "@/models/ItemsModel";
 
-interface ItemsProps {
+interface AddItemProps {
   stores: { storeId: number; storeName: string }[];
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
   setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetchTrigger }) => {
+const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItemFetchTrigger }) => {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [itemName, setItemName] = useState<string>("");
   const [editingStoreIndex, setEditingStoreIndex] = useState<number | null>(null);
@@ -144,4 +144,4 @@ const Items: React.FC<ItemsProps> = ({ stores, setStoreFetchTrigger, setItemFetc
   );
 };
 
-export default Items;
+export default AddItem;

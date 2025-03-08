@@ -1,6 +1,6 @@
 import React from "react";
-import Items from "../../components/Items/Items";
-import Lists from "../../components/Lists/Lists";
+import Items from "../../components/AddItem/AddItem";
+import Lists from "../../components/ShoppingList/ShoppingList";
 import Store from "../../components/Store/Store";
 import ResetButton from "../../components/Buttons/resetButton";
 import { useEffect, useState } from "react";
