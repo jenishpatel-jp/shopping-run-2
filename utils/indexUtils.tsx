@@ -1,11 +1,11 @@
-import { View } from "react-native";
-import { ListRenderItem } from "react-native";
+import { View, ListRenderItem, StyleSheet} from "react-native";
 import Store from "@/components/Store/Store";
 import AddItem from "@/components/AddItem/AddItem";
 import ShoppingList from "@/components/ShoppingList/ShoppingList";
 import ResetButton from "@/components/Buttons/resetButton";
 import { getItems } from "@/models/ItemsModel";
 import { getStores } from "@/models/StoreModel";
+import { styles } from "@/app/(tabs)/indexStyles";
 
 // ListItem interface for the data array in the FlatList
 export interface ListItem {
@@ -26,7 +26,13 @@ export const getData = (
   { key: "lists", component: <ShoppingList itemFetchTrigger={itemFetchTrigger} setItemFetchTrigger={setItemFetchTrigger} /> },
   { key: "reset", component: <ResetButton reset={() => console.log("Reset the button")} /> },
 ];
+
+export const renderItem: ListRenderItem<ListItem> = ({ item }) => (
+  <View style={styles.itemContainer}>{item.component}</View>
+)
   
+
+
 
 
 
