@@ -6,6 +6,7 @@ import { openDatabase } from "@/lib/db";
 import { setUpStoresTable, getStores } from "@/models/StoreModel";
 import { setUpItemsTable, getItems } from "@/models/ItemsModel";
 import { ListItem, getData, renderItem, fetchItems, fetchStores } from "@/utils/indexUtils";
+import { styles } from "./indexStyles";
 
 export default function ShoppingRun() {
   const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
@@ -43,19 +44,3 @@ export default function ShoppingRun() {
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#40146B",
-    paddingTop: 50,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#F5A318",
-  },
-  itemContainer: {
-    marginBottom: 20,
-  },
-});

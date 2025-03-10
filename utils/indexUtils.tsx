@@ -1,4 +1,4 @@
-import { View, ListRenderItem, StyleSheet} from "react-native";
+import { View, ListRenderItem} from "react-native";
 import Store from "@/components/Store/Store";
 import AddItem from "@/components/AddItem/AddItem";
 import ShoppingList from "@/components/ShoppingList/ShoppingList";
