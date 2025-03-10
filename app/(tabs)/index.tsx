@@ -1,38 +1,17 @@
 import React from "react";
-import Items from "../../components/AddItem/AddItem";
-import Lists from "../../components/ShoppingList/ShoppingList";
-import Store from "../../components/Store/Store";
-import ResetButton from "../../components/Buttons/resetButton";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, FlatList, ListRenderItem } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { openDatabase } from "@/lib/db";
 import { setUpStoresTable, getStores } from "@/models/StoreModel";
 import { setUpItemsTable, getItems } from "@/models/ItemsModel";
+import { ListItem, getData, renderItem, fetchItems, fetchStores } from "@/utils/indexUtils";
 
 export default function ShoppingRun() {
   const [stores, setStores] = useState<{ storeId: number; storeName: string }[]>([]);
   const [storeFetchTrigger, setStoreFetchTrigger] = useState(false);
   const [itemFetchTrigger, setItemFetchTrigger] = useState(false);
 
-  interface ListItem {
-    key: string;
-    component: JSX.Element;
-  }
-
-  const data: ListItem[] = [
-    { key: "store", component: <Store setStoreFetchTrigger={setStoreFetchTrigger}/> },
-    { key: "items", component: <Items stores={stores} setStoreFetchTrigger={setStoreFetchTrigger} setItemFetchTrigger={setItemFetchTrigger} /> },
-    { key: "lists", component: <Lists itemFetchTrigger={itemFetchTrigger} setItemFetchTrigger={setItemFetchTrigger} /> },
-    {
-      key: "reset",
-      component: <ResetButton reset={() => console.log("Reset the button")} />,
-    },
-  ];
-
-  const renderItem: ListRenderItem<ListItem> = ({ item }) => (
-    <View style={styles.itemContainer}>{item.component}</View>
-  );
 
   //useEffect to open the database and create Stores and Items table on mount
   useEffect(() => {
@@ -43,28 +22,12 @@ export default function ShoppingRun() {
 
   //useEffect to fetch the stores from the Stores database and add it to the store useState.
   useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const allStores = await getStores();
-        setStores(allStores);
-      } catch (error) {
-        console.error("Error fetching stores:", error);
-      }
-    };
-    fetchStores();
+    fetchStores(setStores);
   }, [storeFetchTrigger]);
 
   //Added to test the getItems function and see if items were in the database
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const allItems = await getItems();
-        //console.log("All items:", allItems);
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-    fetchItems();
+    fetchItems()
   }, []);
 
 
@@ -72,7 +35,7 @@ export default function ShoppingRun() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <FlatList
-          data={data}
+          data={getData(stores, setStoreFetchTrigger, setItemFetchTrigger, itemFetchTrigger)}
           renderItem={renderItem}
           keyExtractor={(item) => item.key}
         />

@@ -27,9 +27,30 @@ export const getData = (
   { key: "reset", component: <ResetButton reset={() => console.log("Reset the button")} /> },
 ];
 
+// Render the items in the FlatList	
 export const renderItem: ListRenderItem<ListItem> = ({ item }) => (
   <View style={styles.itemContainer}>{item.component}</View>
 )
+
+// fetch stores function
+ export const fetchStores = async (setStores: React.Dispatch<React.SetStateAction<{ storeId: number; storeName: string }[]>>) => {
+  try {
+    const allStores = await getStores();
+    setStores(allStores);
+  } catch (error) {
+    console.error("Error fetching stores:", error);
+  }
+ }
+
+// fetch items function
+export const fetchItems = async () => {
+  try {
+    const allItems = await getItems();
+    console.log(allItems);
+  } catch (error) {
+    console.error("Error fetching items:", error);
+  }
+}
   
 
 
