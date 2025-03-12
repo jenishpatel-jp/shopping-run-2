@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "./StoreStyles";
 import { addStore } from "@/models/StoreModel";
-
+import { handleAddStore } from "@/utils/storeUtils";
 
 interface storeProps {
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,14 +18,7 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
   const [buttonPressed, setButtonPressed] = useState(false);
 
   //function to handle how stores are added to the database. 
-  const handleAddStore = async () => {
-    if (!storeName) {
-      console.warn("Store name is empty");
-      return;
-    }
-    await addStore(storeName, () => setStoreFetchTrigger((prev) => !prev));
-    setStoreName("");
-  }
+  handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore);
 
   return (
     <View style={styles.card}>
@@ -42,7 +35,8 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
       {/* Add button */}
       <View style={styles.addButtonContainer}>
         <Pressable
-          onPress={handleAddStore}
+          onPress={ ()=>
+            handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore)}
           // Updates the useState buttonPressed and determines the colour of the button.
           onPressIn={() => setButtonPressed(true)}
           onPressOut={() => setButtonPressed(false)}
