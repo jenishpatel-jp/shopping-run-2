@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { StyleSheet, View, FlatList, ListRenderItem } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { openDatabase } from "@/lib/db";
-import { setUpStoresTable, getStores } from "@/models/StoreModel";
-import { setUpItemsTable, getItems } from "@/models/ItemsModel";
-import { ListItem, getData, renderItem, fetchItems, fetchStores } from "@/utils/indexUtils";
+import { setUpStoresTable } from "@/models/StoreModel";
+import { setUpItemsTable } from "@/models/ItemsModel";
+import { getData, renderItem, fetchItems, fetchStores } from "@/utils/indexUtils";
 import { styles } from "./indexStyles";
 
 export default function ShoppingRun() {
@@ -31,7 +31,7 @@ export default function ShoppingRun() {
     fetchItems()
   }, []);
 
-
+  //Flatlist that will render the stores and items
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>

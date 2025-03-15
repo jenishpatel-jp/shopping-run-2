@@ -13,7 +13,14 @@ export interface ListItem {
   component: JSX.Element;
 }
 
-// Generate the data array for the FlatList
+/* 
+
+Generate the data array for the FlatList
+- Store component
+- Items component
+- Lists component
+- Reset button component
+*/
 
 export const getData = (
   stores: {storeId: number; storeName: string}[],

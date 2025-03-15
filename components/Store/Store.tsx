@@ -35,8 +35,7 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
       {/* Add button */}
       <View style={styles.addButtonContainer}>
         <Pressable
-          onPress={ ()=>
-            handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore)}
+          onPress={()=> handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore)}
           // Updates the useState buttonPressed and determines the colour of the button.
           onPressIn={() => setButtonPressed(true)}
           onPressOut={() => setButtonPressed(false)}
