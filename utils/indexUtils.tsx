@@ -22,6 +22,7 @@ Generate the data array for the FlatList
 - Reset button component
 */
 
+// getData function to generate the compnents for the FlatList
 export const getData = (
   stores: {storeId: number; storeName: string}[],
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>,
@@ -34,12 +35,12 @@ export const getData = (
   { key: "reset", component: <ResetButton reset={() => console.log("Reset the button")} /> },
 ];
 
-// Render the items in the FlatList	
+// renderItem prop for the items in the FlatList	
 export const renderItem: ListRenderItem<ListItem> = ({ item }) => (
   <View style={styles.itemContainer}>{item.component}</View>
 )
 
-// fetch stores function
+// fetch stores function that stores the stores in the useState
  export const fetchStores = async (setStores: React.Dispatch<React.SetStateAction<{ storeId: number; storeName: string }[]>>) => {
   try {
     const allStores = await getStores();
@@ -49,7 +50,7 @@ export const renderItem: ListRenderItem<ListItem> = ({ item }) => (
   }
  }
 
-// fetch items function
+// fetch items function that stores the items in the useState
 export const fetchItems = async () => {
   try {
     const allItems = await getItems();
