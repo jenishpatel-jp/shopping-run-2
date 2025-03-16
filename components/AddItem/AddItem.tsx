@@ -4,6 +4,7 @@ import { styles } from "./AddItemStyles";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { handleAddItem, selectStoreFunction, handleUpdateStore, isStoreSelected, handleDeleteStore } from "@/utils/addItemUtils";
+import { EnterItemTextInput } from "./AddItemComponents/EnterItem";
 
 interface AddItemProps {
   stores: { storeId: number; storeName: string }[];
@@ -22,14 +23,7 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
   return (
     <View style={styles.card}>
       {/* Text Input to enter each items name */}
-      <TextInput
-        placeholder="Enter Item"
-        style={styles.textInput}
-        placeholderTextColor={"#F5A418"}
-        textAlign="center"
-        value={itemName}
-        onChangeText={setItemName}
-      />
+      <EnterItemTextInput itemName={itemName} setItemName={setItemName} />
 
       {/* Mapping  each store*/}
       {stores.map((store, index) => (
