@@ -4,16 +4,16 @@ import { editStore, deleteStore } from "@/models/StoreModel"
 //Function to add an item to the store
 export const handleAddItem = (
     itemName: string, 
-    selectedStore: {storeId: number, storeName: string},
+    selectedStore: {storeId: number, storeName: string} | null,
     setItemFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>,
     setItemName: React.Dispatch<React.SetStateAction<string>>
 ) => {
-    if (selectedStore && itemName) {
-        addItem(selectedStore.storeId, itemName, 0, () => setItemFetchTrigger((prev) => !prev));
-        setItemName("");
-    } else {
+    if (!selectedStore || !itemName) {
         console.warn("No store selected or item name is empty");
+        return;
     }
+    addItem(selectedStore.storeId, itemName, 0, () => setItemFetchTrigger((prev) => !prev));
+    setItemName("");
 };
 
 //Function to select which store has been selected

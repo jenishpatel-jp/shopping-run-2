@@ -3,8 +3,7 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "./AddItemStyles";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
-import { editStore, deleteStore } from "@/models/StoreModel";
-import { addItem } from "@/models/ItemsModel";
+import { handleAddItem, selectStoreFunction, handleUpdateStore, isStoreSelected, handleDeleteStore } from "@/utils/addItemUtils";
 
 interface AddItemProps {
   stores: { storeId: number; storeName: string }[];
@@ -19,46 +18,6 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
   const [newStoreName, setNewStoreName] = useState<string>("");
   const [selectedStore, setSelectedStore] = useState<{storeId: number; storeName: string;} | null>(null);
 
-  //Function to add an item to the store
-  const handleAddItem = (itemName: string) => {
-    if (selectedStore && itemName) {
-      addItem(selectedStore.storeId, itemName, 0, () => setItemFetchTrigger((prev) => !prev));
-      setItemName("");
-    } else {
-      console.warn("No store selected or item name is empty");
-    }
-  };
-
-  //Function to select which store has been selected
-  const selectStoreFunction = (storeId: number, storeName: string) => {
-    if (!selectedStore || selectedStore.storeId !== storeId) {
-      setSelectedStore({ storeId, storeName });
-    } else {
-      setSelectedStore(null);
-    }
-  };
-
-  //Function to edit a store
-  const handleUpdateStore = async (storeId: number, storeName: string) => {
-    if (!storeName) {
-      console.warn("Store name is empty");
-      return;
-    }
-    await editStore(storeId, storeName, () => setStoreFetchTrigger((prev) => !prev));
-    setNewStoreName("");
-    setEditingStoreIndex(null);
-  };
-
-  // Code added to ensure null is not returned so I can toggle the checkbox on and off when selected
-  const isStoreSelected = () => {
-    if (selectedStore) {
-      return selectedStore.storeName;
-    }
-  };
-
-  const handleDeleteStore = async (storeId: number) => {
-    await deleteStore(storeId, () => setStoreFetchTrigger((prev) => !prev));
-  };
 
   return (
     <View style={styles.card}>
@@ -89,9 +48,9 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
               <CustomCheckbox
                 key={index}
                 onPress={() =>
-                  selectStoreFunction(store.storeId, store.storeName)
+                  selectStoreFunction(store.storeId, store.storeName, selectedStore, setSelectedStore)
                 }
-                checked={isStoreSelected() === store.storeName}
+                checked={isStoreSelected(selectedStore) === store.storeName}
               />
               <Text style={styles.checkboxText}>{store.storeName}</Text>
             </View>
@@ -102,7 +61,7 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
             {editingStoreIndex === index ? (
               // editStore function
               <Pressable
-                onPress={() => handleUpdateStore(store.storeId, newStoreName)}
+                onPress={() => handleUpdateStore(store.storeId, newStoreName, setStoreFetchTrigger, setNewStoreName, setEditingStoreIndex)}
               >
                 <Text style={styles.buttonText}>Update</Text>
               </Pressable>
@@ -117,7 +76,7 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
                 />
               </Pressable>
             )}
-            <Pressable onPress={() => handleDeleteStore(store.storeId)}>
+            <Pressable onPress={() => handleDeleteStore(store.storeId, setStoreFetchTrigger)}>
               <MaterialIcons
                 style={styles.delete}
                 name="delete-outline"
@@ -133,7 +92,7 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
 
       <View style={styles.addButtonContainer}>
         <Pressable
-          onPress={() => handleAddItem(itemName)}
+          onPress={() => handleAddItem(itemName, selectedStore, setItemFetchTrigger, setItemName)}
           onPressIn={() => setButtonPressed(true)}
           onPressOut={() => setButtonPressed(false)}
         >
