@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "./AddItemStyles";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
