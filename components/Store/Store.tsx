@@ -4,6 +4,7 @@ import { styles } from "./StoreStyles";
 import { addStore } from "@/models/StoreModel";
 import { handleAddStore } from "@/utils/storeUtils";
 import EnterStoreName from "./StoreComponents/EnterStoreName";
+import AddStoreButton from "./StoreComponents/AddStoreButton";
 
 interface storeProps {
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,24 +18,18 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
   return (
     <View style={styles.card}>
       {/* Text input where the user enters the Store name. */}
-      <EnterStoreName storeName={storeName} setStoreName={setStoreName} />
+      <EnterStoreName 
+        storeName={storeName} 
+        setStoreName={setStoreName} />
 
       {/* Add button */}
-      <View style={styles.addButtonContainer}>
-        <Pressable
-          onPress={()=> handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore)}
-          // Updates the useState buttonPressed and determines the colour of the button.
-          onPressIn={() => setButtonPressed(true)}
-          onPressOut={() => setButtonPressed(false)}
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed || buttonPressed ? "#5200A3" : "#40146B",
-            },
-          ]}
-        >
-          <Text style={styles.buttonText}>Add</Text>
-        </Pressable>
-      </View>
+      <AddStoreButton 
+        setStoreFetchTrigger={setStoreFetchTrigger} 
+        setStoreName={setStoreName}
+        storeName={storeName} 
+        buttonPressed={buttonPressed}
+        setButtonPressed={setButtonPressed}
+        />
     </View>
   );
 };
