@@ -9,16 +9,9 @@ interface storeProps {
 }
 
 const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
-  //The Store component is responsible for adding stores and editing stores
 
-  //The storeName useState will store the name of the store temporarily before it is added to the Database.
   const [storeName, setStoreName] = useState("");
-
-  //buttonPressed useState will determine what colour the button will be when pressed
   const [buttonPressed, setButtonPressed] = useState(false);
-
-  //function to handle how stores are added to the database. 
-  handleAddStore(storeName, setStoreFetchTrigger, setStoreName, addStore);
 
   return (
     <View style={styles.card}>
