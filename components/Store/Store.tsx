@@ -3,6 +3,7 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "./StoreStyles";
 import { addStore } from "@/models/StoreModel";
 import { handleAddStore } from "@/utils/storeUtils";
+import EnterStoreName from "./StoreComponents/EnterStoreName";
 
 interface storeProps {
   setStoreFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,14 +17,7 @@ const Store: React.FC<storeProps> = ({ setStoreFetchTrigger }) => {
   return (
     <View style={styles.card}>
       {/* Text input where the user enters the Store name. */}
-      <TextInput
-        style={styles.textInput}
-        placeholder="Enter store name..."
-        placeholderTextColor={"#F5A418"}
-        textAlign="center"
-        value={storeName}
-        onChangeText={setStoreName}
-      />
+      <EnterStoreName storeName={storeName} setStoreName={setStoreName} />
 
       {/* Add button */}
       <View style={styles.addButtonContainer}>
