@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./AddItemStyles";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { handleAddItem, selectStoreFunction, handleUpdateStore, isStoreSelected, handleDeleteStore } from "@/utils/addItemUtils";
 import { EnterItemTextInput } from "./AddItemComponents/EnterItem";
 import EditItemTextInput from "./AddItemComponents/EditItemTextInput";
+import EditButton from "./AddItemComponents/editButton";
 
 interface AddItemProps {
   stores: { storeId: number; storeName: string }[];
@@ -59,15 +60,7 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
                 <Text style={styles.buttonText}>Update</Text>
               </Pressable>
             ) : (
-              <Pressable>
-                <Feather
-                  style={styles.edit}
-                  name="edit"
-                  size={26}
-                  color="#F5A418"
-                  onPress={() => setEditingStoreIndex(index)}
-                />
-              </Pressable>
+              <EditButton setEditingStoreIndex={setEditingStoreIndex} index={index} />
             )}
             <Pressable onPress={() => handleDeleteStore(store.storeId, setStoreFetchTrigger)}>
               <MaterialIcons
