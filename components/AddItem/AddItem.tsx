@@ -7,6 +7,7 @@ import { handleAddItem, selectStoreFunction, handleUpdateStore, isStoreSelected,
 import { EnterItemTextInput } from "./AddItemComponents/EnterItem";
 import EditItemTextInput from "./AddItemComponents/EditItemTextInput";
 import EditButton from "./AddItemComponents/editButton";
+import UpdateButton from "./AddItemComponents/UpdateButton";
 
 interface AddItemProps {
   stores: { storeId: number; storeName: string }[];
@@ -54,11 +55,12 @@ const AddItem: React.FC<AddItemProps> = ({ stores, setStoreFetchTrigger, setItem
           <View style={styles.updateView}>
             {editingStoreIndex === index ? (
               // editStore function
-              <Pressable
-                onPress={() => handleUpdateStore(store.storeId, newStoreName, setStoreFetchTrigger, setNewStoreName, setEditingStoreIndex)}
-              >
-                <Text style={styles.buttonText}>Update</Text>
-              </Pressable>
+              <UpdateButton
+                storeId={store.storeId}
+                newStoreName={newStoreName}
+                setStoreFetchTrigger={setStoreFetchTrigger}
+                setNewStoreName={setNewStoreName}
+                setEditingStoreIndex={setEditingStoreIndex} />
             ) : (
               <EditButton setEditingStoreIndex={setEditingStoreIndex} index={index} />
             )}
